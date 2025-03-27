@@ -1,0 +1,16 @@
+<nav class="bg-gray-800 text-white px-6 py-4 flex justify-between items-center shadow-md fixed w-full z-10">
+  <!-- Logo -->
+  <div class="text-xl font-bold">Mi Dashboard</div>
+
+  <!-- Menú hamburguesa en móviles -->
+  <button class="block md:hidden text-white focus:outline-none" (click)="toggleSidebar()">
+    ☰
+  </button>
+
+  <!-- Opciones en pantallas grandes -->
+  <div class="hidden md:flex space-x-6">
+    <a href="#" class="hover:text-[#f4a261] transition">Inicio</a>
+    <a href="#" class="hover:text-[#f4a261] transition">Perfil</a>
+    <a href="#" class="hover:text-[#f4a261] transition">Salir</a>
+  </div>
+</nav>
