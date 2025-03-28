@@ -24,8 +24,7 @@ export class AnalisisFisicoComponent {
   ];
 
   rows = [
-    { id: 1, fecha: '2025-03-27', descripcion: 'Muestra A' },
-    { id: 2, fecha: '2025-03-28', descripcion: 'Muestra B' }
+
   ]
 
 
