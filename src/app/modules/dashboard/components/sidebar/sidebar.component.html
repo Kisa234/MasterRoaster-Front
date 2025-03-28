@@ -1,12 +1,23 @@
-<aside class="bg-gray-800 text-white w-64 h-screen fixed top-15 left-0 transform transition-transform duration-300 ease-in-out md:translate-x-0"
+<aside class="bg-gray-800 text-white w-64 h-screen fixed top-14 left-0 transform transition-transform duration-300 ease-in-out md:translate-x-0"
        [class.-translate-x-full]="isHidden">
   <!-- Menú -->
   <nav class="flex flex-col space-y-4 p-6">
-    <a href="#" class="p-3 rounded hover:bg-[#f4a261] transition">Dashboard</a>
-    <a href="#" class="p-3 rounded hover:bg-[#f4a261] transition">Lotes</a>
-    <a href="#" class="p-3 rounded hover:bg-[#f4a261] transition">Pedidos</a>
-    <a href="#" class="p-3 rounded hover:bg-[#f4a261] transition">Muestras</a>
-    <a href="#" class="p-3 rounded hover:bg-[#f4a261] transition">Analisis</a>
+    <a routerLink="/dashboard" class="p-3 rounded hover:bg-[#f4a261] transition">Dashboard</a>
+    <a routerLink="/dashboard/lotes" class="p-3 rounded hover:bg-[#f4a261] transition">Lotes</a>
+    <a routerLink="/dashboard/pedidos" class="p-3 rounded hover:bg-[#f4a261] transition">Pedidos</a>
+    <a routerLink="/dashboard/muestras" class="p-3 rounded hover:bg-[#f4a261] transition">Muestras</a>
+
+    <!-- Grupo de Análisis con Click -->
+    <div class="relative">
+      <button (click)="toggleAnalisisMenu()" class="p-3 rounded hover:bg-[#f4a261] transition w-full text-left">
+        Análisis
+      </button>
+      <div *ngIf="isAnalisisMenuOpen" class="bg-gray-700 rounded shadow-lg w-full">
+        <a routerLink="/dashboard/analisis-fisico-rapido" class="block p-3 hover:bg-[#f4a261] transition">Análisis Rápido</a>
+        <a routerLink="/dashboard/analisis-sensorial" class="block p-3 hover:bg-[#f4a261] transition">Análisis Sensorial</a>
+        <a routerLink="/dashboard/analisis-fisico" class="block p-3 hover:bg-[#f4a261] transition">Análisis Físico</a>
+      </div>
+    </div>
 
   </nav>
 </aside>

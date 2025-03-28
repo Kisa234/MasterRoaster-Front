@@ -5,9 +5,8 @@
   <!-- Sidebar -->
   <app-sidebar [isHidden]="isSidebarHidden"></app-sidebar>
 
-  <!-- Contenido principal -->
+  <!-- Contenido donde se carga la vista dinámica -->
   <main class="flex-1 p-6 bg-gray-100 min-h-screen pt-16 md:ml-64">
-    <h1 class="text-3xl font-bold text-gray-800">Bienvenido al Dashboard</h1>
-    <p class="mt-2 text-gray-700">Aquí puedes administrar tu aplicación.</p>
+    <router-outlet></router-outlet>
   </main>
 </div>
