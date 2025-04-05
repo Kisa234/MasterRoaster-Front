@@ -1,0 +1,12 @@
+<div
+  class="p-4 rounded-md text-white shadow-md flex justify-between items-center"
+  [ngClass]="{
+    'bg-green-600': tipo === 'success',
+    'bg-red-600': tipo === 'error',
+    'bg-blue-600': tipo === 'info',
+    'bg-yellow-500 text-black': tipo === 'warning'
+  }"
+>
+  <span>{{ mensaje }}</span>
+  <button (click)="cerrar.emit()" class="ml-4 font-bold">×</button>
+</div>
