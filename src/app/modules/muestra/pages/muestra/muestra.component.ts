@@ -1,36 +1,30 @@
 import { Component } from '@angular/core';
+import { CrearLoteComponent } from '../../../lote/pages/crear-lote/crear-lote.component';
 import { TableComponent } from '../../../../shared/components/table/table.component';
-import { CrearAnalisisComponent } from '../../../analisis/analisisRapido/pages/crear-analisis/crear-analisis.component';
 import { RouterModule } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-lote',
+  selector: 'app-muestra',
   imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent],
-  templateUrl: './lote.component.html',
-
+  templateUrl: './muestra.component.html',
+  styles:""
 })
-export class LoteComponent {
+export class MuestraComponent {
   filtro: string = '';
   mostrarModal: boolean = false;
 
   columns = [
-    'ID',
-    'Productor',
-    'Finca',
-    'Region',
-    'Departamento',
-    'Fecha_compra',
+    'Nombre',
     'Peso',
-    'Estado',
-    'Variedades',
+    'Usuario',
+    'Analisis'
   ];
 
   rows = [
-    { id: 1, fecha: '2025-03-27', descripcion: 'Muestra A' },
-    { id: 2, fecha: '2025-03-28', descripcion: 'Muestra B' }
+    {"nombre": "Muestra 1", "peso": "10kg", "usuario": "Usuario 1", "analisis": "Analisis 1"},
+    {"nombre": "Muestra 2", "peso": "20kg", "usuario": "Usuario 2", "analisis": "Analisis 2"},
   ]
 
 

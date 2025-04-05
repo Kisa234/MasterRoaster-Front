@@ -26,6 +26,8 @@ export class CrearLoteComponent {
     variedades            : null,
   };
 
+  
+
   guardar() {
     this.onAnalisisCreado.emit();
     this.cerrar();

@@ -6,6 +6,7 @@ import { AnalisisSensorialComponent } from './modules/analisis/analisisSensorial
 import { LoteComponent } from './modules/lote/pages/lote/lote.component';
 import { RegisterComponent } from './modules/auth/pages/register/register.component';
 import { LoginComponent } from './modules/auth/pages/login/login.component';
+import { MuestraComponent } from './modules/muestra/pages/muestra/muestra.component';
 
 export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -14,7 +15,8 @@ export const routes: Routes = [
       { path: 'analisis-fisico-rapido', component: AnalisisFisicoRapidoComponent },
       { path: 'analisis-fisico', component: AnalisisFisicoComponent },
       { path: 'analisis-sensorial', component: AnalisisSensorialComponent },
-      { path: 'lotes', component: LoteComponent }
+      { path: 'lotes', component: LoteComponent },
+      { path: 'muestra', component: MuestraComponent },
   ]},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
