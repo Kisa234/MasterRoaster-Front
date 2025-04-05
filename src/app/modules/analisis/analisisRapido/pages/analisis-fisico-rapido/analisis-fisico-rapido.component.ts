@@ -21,20 +21,10 @@ export class AnalisisFisicoRapidoComponent {
     'Grado',
   ];
 
-  analisis: = [
-    {"id":1, "Fecha Registro":"2025-03-27", "Grado":"Muestra A"},
-  ];
+  rows = [
 
-  filtro: string = '';
-  analisisFiltrados: Analisis[] = [...this.analisis];
+  ]
 
-
-  filtrarAnalisis() {
-    const term = this.filtro.toLowerCase();
-    this.analisisFiltrados = this.analisis.filter(a =>
-      a.descripcion.toLowerCase().includes(term) || a.fecha.includes(term)
-    );
-  }
 
 
   mostrarModal = false;

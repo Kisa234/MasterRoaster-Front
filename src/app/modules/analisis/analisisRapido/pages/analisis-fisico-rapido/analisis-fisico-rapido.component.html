@@ -8,8 +8,7 @@
       type="text"
       placeholder="Buscar análisis..."
       class="border border-gray-300 rounded px-4 py-2 w-2/3 focus:outline-none focus:ring-2 focus:ring-[#f4a261]"
-      [(ngModel)]="filtro"
-      (input)="filtrarAnalisis()"
+      [(ngModel)]="rows"
     />
 
     <!-- Botón para agregar análisis -->
@@ -21,7 +20,7 @@
   </div>
 
   <!-- Tabla reutilizable -->
-  <app-table [columns]="columns" [data]="analisisFiltrados"></app-table>
+  <app-table [columns]="columns" [data]="rows"></app-table>
 
   <!-- Incluir el formulario de creación -->
   <app-form-analisis-rapido
