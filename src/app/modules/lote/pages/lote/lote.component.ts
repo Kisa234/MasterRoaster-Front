@@ -1,37 +1,74 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
+import { LoteService } from '../../service/lote.service';
+import { EditarLoteComponent } from "../editar-lote/editar-lote/editar-lote.component";
 
 
 @Component({
   selector: 'app-lote',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent],
+  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent, EditarLoteComponent],
   templateUrl: './lote.component.html',
 
 })
-export class LoteComponent {
+export class LoteComponent implements OnInit {
+
+  constructor(
+    private readonly loteService:LoteService,
+  ){}
+
   filtro: string = '';
   mostrarModal: boolean = false;
+  mostrarModalLote: boolean = false;
+  loteIdActual: string = ''; 
 
   columns = [
-    'ID',
-    'Productor',
-    'Finca',
-    'Region',
-    'Departamento',
-    'Fecha_compra',
-    'Peso',
-    'Variedades',
+    'id',
+    'productor',
+    'finca',
+    'region',
+    'departamento',
+    'fecha_compra',
+    'peso',
+    'variedades'
   ];
 
-  rows = [
-    { id: 1, fecha: '2025-03-27', descripcion: 'Muestra A' },
-    { id: 2, fecha: '2025-03-28', descripcion: 'Muestra B' }
-  ]
+  rows: {
+    id: any;
+    productor: string;
+    finca: string;
+    region: string;
+    departamento: string;
+    fecha_compra: Date;
+    peso: number;
+    variedades: string;
+  }[] = [];
 
+
+  getLotes(){
+    this.loteService.getLotes().subscribe({
+      next: (response) => {
+        this.rows = response.map((lote) => ({
+          id: lote.id_lote,
+          productor: lote.productor,
+          finca: lote.finca,
+          region: lote.region,
+          departamento: lote.departamento,
+          fecha_compra: lote.fecha_compra,
+          peso: lote.peso,
+          variedades: lote.variedades,
+        }));
+      },
+      error: (error) => console.error('Error al obtener los lotes:', error),
+    });
+  }
+
+  ngOnInit() {
+    this.getLotes();
+  }
 
 
   abrirModal() {
@@ -40,10 +77,27 @@ export class LoteComponent {
 
   cerrarModal() {
     this.mostrarModal = false;
+    this.mostrarModalLote = false;
+    
   }
 
-  guardarAnalisis() {
-
+  actualizarLotes() {
     this.cerrarModal();
+    this.getLotes();
+  }
+  
+  editRow(row: any) {
+    this.loteIdActual = row.id; 
+    this.mostrarModalLote = true;
+  }
+
+  deleteRow(row: any) {
+    this.loteService.deleteLote(row.id).subscribe({
+      next: () => {
+        this.getLotes();
+      },
+      error: (error) => console.error('Error al eliminar el lote:', error),
+    });
+
   }
 }

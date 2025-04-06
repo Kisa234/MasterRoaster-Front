@@ -11,15 +11,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of data" class="border-b text-white border-gray-600 hover:bg-gray-700">
-        <td *ngFor="let column of columns" class="p-3">{{ row[column] }}</td>
-        <td class="p-3 flex space-x-2">
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded flex items-center">
-            <mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon> Editar
+        <td *ngFor="let column of columns" class="p-3">{{ row[column] || 'N/A' }}</td>
+        <td class="p-3">
+          <button 
+            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" 
+            (click)="onEdit(row)">
+            Editar
           </button>
         </td>
-        <td>
-          <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded flex items-center">
-             <mat-icon aria-hidden="false" aria-label="delete icon" fontIcon="delete"></mat-icon>Eliminar
+        <td class="p-3">
+          <button 
+            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" 
+            (click)="onDelete(row)">
+            Eliminar
           </button>
         </td>
       </tr>

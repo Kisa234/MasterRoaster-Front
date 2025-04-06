@@ -31,7 +31,7 @@ export class LoteService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
-  getLotesByEstado(estado: string): Observable<Lote[]> {
-    return this.http.get<Lote[]>(`${this.baseUrl}/estado/${estado}`);
+  getLotes(): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.baseUrl}`);
   }
 }

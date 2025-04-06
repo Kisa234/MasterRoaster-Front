@@ -2,10 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoteService } from '../../service/lote.service';
 import { Lote } from '../../../../interfaces/lote.interface';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-crear-lote',
-  imports: [FormsModule],
+  imports: [FormsModule,NgFor],
   templateUrl: './crear-lote.component.html',
 })
 export class CrearLoteComponent {
@@ -15,6 +16,13 @@ export class CrearLoteComponent {
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
+  procesos = [
+    'Lavado',
+    'Natural',
+    'Honey',
+    'Experimental',
+  ]
+
   nuevoLote: Lote = {
     productor: '',
     finca: '',
@@ -23,7 +31,7 @@ export class CrearLoteComponent {
     fecha_compra: new Date(), 
     peso: 0,
     variedades: '',
-
+    proceso: '',
   };
 
   submit() {

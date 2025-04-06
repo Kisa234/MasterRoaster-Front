@@ -20,12 +20,25 @@
   </div>
 
   <!-- Tabla reutilizable -->
-  <app-table [columns]="columns" [data]="rows"></app-table>
+  <app-table 
+    [columns]="columns"
+    [data]="rows"
+    [onEdit]="editRow.bind(this)"
+    [onDelete]="deleteRow.bind(this)"
+    >
+  </app-table>
 
   <!-- Incluir el formulario de creación -->
   <app-crear-lote
     *ngIf="mostrarModal"
     (onCerrar)="cerrarModal()"
-    (onAnalisisCreado)="guardarAnalisis()">
+    (onAnalisisCreado)="actualizarLotes()">
   </app-crear-lote>
+
+  <app-editar-lote
+    *ngIf="mostrarModalLote"
+    [id] = "loteIdActual"
+    (onCerrar)="cerrarModal()"
+    (onAnalisisCreado)="actualizarLotes()">
+  </app-editar-lote>
 </div>

@@ -10,8 +10,9 @@ export interface Lote {
   fecha_compra          : Date,
   peso                  : number,
   variedades            : string,
-  eliminado?             : boolean,
-  user_id_user?          : string,
-  analisis_id?         : string,
+  proceso               : string,
+  eliminado?            : boolean,
+  user_id_user?         : string,
+  analisis_id?          : string,
 
 }

@@ -9,7 +9,8 @@ import {MatIconModule} from '@angular/material/icon';
   styles: ''
 })
 export class TableComponent {
-  @Input() columns: string[] = []; // Nombres de las columnas
-  @Input() data: any[] = []; // Datos dinámicos
-
+  @Input() columns: string[] = []; 
+  @Input() data: any[] = []; 
+  @Input() onEdit!: (row: any) => void; 
+  @Input() onDelete!: (row: any) => void;
 }
