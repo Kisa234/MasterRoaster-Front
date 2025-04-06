@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../enviroments/enviroments';
-
+import { Observable } from "rxjs";
+import { Lote } from "../../../interfaces/lote.interface";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../../enviroments/enviroments";
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -10,30 +10,28 @@ import { environment } from '../../../../enviroments/enviroments';
 export class LoteService {
   private baseUrl = `${environment.apiUrl}/lote`;
 
-  constructor(private http: HttpClient) {}
-
-  // Crear un nuevo lote
-  createLote(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, data);
+  constructor(private http: HttpClient) {
+    console.log('✅ LoteService inicializado correctamente');
   }
 
-  // Obtener un lote por ID
-  getLoteById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  createLote(data: Lote): Observable<Lote> {
+    console.log('📤 Enviando datos al backend:', data);
+    return this.http.post<Lote>(this.baseUrl, data);
   }
 
-  // Actualizar un lote
-  updateLote(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  getLoteById(id: string): Observable<Lote> {
+    return this.http.get<Lote>(`${this.baseUrl}/${id}`);
   }
 
-  // Eliminar un lote
-  deleteLote(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  updateLote(id: string, data: Lote): Observable<Lote> {
+    return this.http.put<Lote>(`${this.baseUrl}/${id}`, data);
   }
 
-  // Obtener lotes por estado
-  getLotesByEstado(estado: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/estado/${estado}`);
+  deleteLote(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getLotesByEstado(estado: string): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.baseUrl}/estado/${estado}`);
   }
 }

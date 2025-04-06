@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../../../shared/components/table/table.component';
-import { CrearAnalisisComponent } from '../../../analisis/analisisRapido/pages/crear-analisis/crear-analisis.component';
 import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
+
 
 @Component({
   selector: 'app-lote',
@@ -24,7 +24,6 @@ export class LoteComponent {
     'Departamento',
     'Fecha_compra',
     'Peso',
-    'Estado',
     'Variedades',
   ];
 
