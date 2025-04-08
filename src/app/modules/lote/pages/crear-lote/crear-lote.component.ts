@@ -28,7 +28,7 @@ export class CrearLoteComponent {
     finca: '',
     region: '',
     departamento: '',
-    fecha_compra: new Date(), 
+    fecha_compra: new Date(),
     peso: 0,
     variedades: '',
     proceso: '',
@@ -38,7 +38,6 @@ export class CrearLoteComponent {
     this.nuevoLote.peso = Number(this.nuevoLote.peso);
     this.loteService.createLote(this.nuevoLote).subscribe({
       next: (response) => {
-        console.log('Lote creado:', response);
         this.onAnalisisCreado.emit();
         this.cerrar();
       },
