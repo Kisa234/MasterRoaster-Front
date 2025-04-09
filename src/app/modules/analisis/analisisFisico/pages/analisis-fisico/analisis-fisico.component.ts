@@ -17,10 +17,10 @@ export class AnalisisFisicoComponent {
   mostrarModal: boolean = false;
 
   columns = [
-    'ID',
-    'Fecha',
-    'Descripción',
-    'Acciones'
+    'Id Lote',
+    'Fecha Registro',
+    'Grado',
+    'Comentario'
   ];
 
   rows = [

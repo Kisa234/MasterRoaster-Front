@@ -16,9 +16,15 @@ import { CrearAnalisisComponent } from '../crear-analisis/crear-analisis.compone
 })
 export class AnalisisFisicoRapidoComponent {
   columns = [
-    'Id',
+    'Id Lote',
     'Fecha Registro',
-    'Grado',
+    'Horneado',
+    'Humo',
+    'Uniforme',
+    'Verde',
+    'Arrebatado',
+    'Oscuro',
+    'Comentario'
   ];
 
   rows = [

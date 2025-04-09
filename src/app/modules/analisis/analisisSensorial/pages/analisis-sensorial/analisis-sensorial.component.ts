@@ -15,15 +15,14 @@ export class AnalisisSensorialComponent {
   mostrarModal: boolean = false;
 
   columns = [
-    'ID',
-    'Fecha',
-    'Descripción',
-    'Acciones'
+    'Id Lote',
+    'Fecha Registro',
+    'Puntaje',
+    'Comentario'
   ];
 
   rows = [
-    { id: 1, fecha: '2025-03-27', descripcion: 'Muestra A' },
-    { id: 2, fecha: '2025-03-28', descripcion: 'Muestra B' }
+
   ]
 
 

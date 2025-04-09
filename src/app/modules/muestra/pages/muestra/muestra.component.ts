@@ -18,13 +18,12 @@ export class MuestraComponent {
   columns = [
     'Nombre',
     'Peso',
-    'Usuario',
-    'Analisis'
+    'Cliente',
+    'Fecha de Registro',
   ];
 
   rows = [
-    {"nombre": "Muestra 1", "peso": "10kg", "usuario": "Usuario 1", "analisis": "Analisis 1"},
-    {"nombre": "Muestra 2", "peso": "20kg", "usuario": "Usuario 2", "analisis": "Analisis 2"},
+
   ]
 
 
