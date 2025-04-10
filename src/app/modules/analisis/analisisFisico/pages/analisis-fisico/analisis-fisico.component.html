@@ -17,15 +17,36 @@
         (click)="abrirModal()">
         Agregar Análisis
       </button>
+
+      <button
+        class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
+        (click)="abrirModal()">
+        Agregar Análisis Rapido
+      </button>
     </div>
 
-    <!-- Tabla reutilizable -->
-    <app-table [columns]="columns" [data]="rows"></app-table>
+    <!-- Tabla  -->
+    <app-table
+      [onEdit]="editarAnalisis.bind(this)"
+      [onDelete]="eliminarAnalisis.bind(this)"
+      [columns]="columns"
+      [data]="rows" >
+    </app-table>
 
-    <!-- Incluir el formulario de creación -->
+    <!-- Crear Analisis -->
     <app-crear-analisis
       *ngIf="mostrarModal"
       (onCerrar)="cerrarModal()"
-      (onAnalisisCreado)="guardarAnalisis()">
+      (onAnalisisCreado)="actualizarAnalisis()">
     </app-crear-analisis>
+
+    <!-- Editar Analisis -->
+    <app-editar-analisis-fisico
+      *ngIf="mostrarModalEditar"
+      [id] = "loteIdActual"
+      (onCerrar)="cerrarModal()"
+      (onAnalisisEditado)="actualizarAnalisis()">
+    </app-editar-analisis-fisico>
+
+
   </div>

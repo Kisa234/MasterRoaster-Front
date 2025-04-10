@@ -10,7 +10,7 @@ import { AnalisisFisico } from '../../../../interfaces/analisisFisico.interface'
 })
 export class AnalisisFisicoService {
 
-  private baseUrl = `${environment.apiUrl}/analisisSensorial`;
+  private baseUrl = `${environment.apiUrl}/analisisFisico`;
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class AnalisisFisicoService {
   }
 
   getAllAnalisis(): Observable<AnalisisFisico[]> {
-    return this.http.get<AnalisisFisico[]>(`${this.baseUrl}/all`);
+    return this.http.get<AnalisisFisico[]>(`${this.baseUrl}`);
   }
 
   deleteAnalisis(id: string): Observable<void> {

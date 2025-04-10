@@ -1,33 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Lote } from '../../../../../interfaces/lote.interface';
-import { LoteService } from '../../../service/lote.service';
+import { Lote } from '../../../../interfaces/lote.interface';
+import { LoteService } from '../../service/lote.service';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-editar-lote', 
+  selector: 'app-editar-lote',
   standalone: true,
   imports: [FormsModule, NgFor],
   templateUrl: './editar-lote.component.html',
   styles: [],
 })
 export class EditarLoteComponent implements OnInit {
-  
+
   constructor(private readonly loteService: LoteService) {}
- 
+
   ngOnInit(): void {
      if (this.id) {
       this.loteService.getLoteById(this.id).subscribe({
         next: (response) => {
           this.nuevoLote = response;
-
-          if (typeof this.nuevoLote.fecha_compra === 'string') {
-            this.nuevoLote.fecha_compra = new Date(this.nuevoLote.fecha_compra);
-          }
-
-          if (!this.procesos.includes(this.nuevoLote.proceso)) {
-            this.procesos.push(this.nuevoLote.proceso);
-          }
         },
         error: (error) => console.error('Error al obtener el lote:', error)
       });
@@ -50,7 +42,7 @@ export class EditarLoteComponent implements OnInit {
     finca: '',
     region: '',
     departamento: '',
-    fecha_compra: new Date(), 
+    fecha_compra: new Date(),
     peso: 0,
     variedades: '',
     proceso: '',

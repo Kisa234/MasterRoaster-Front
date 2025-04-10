@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './crear-analisis.component.html',
   styles: ''
 })
-export class CrearAnalisisComponent {
+export class CrearAnalisisFisicoComponent {
 
   colores = ['Azul verde', 'Azulado Verde', 'Verde', 'Verdoso', 'Amarillo verde', 'Amarillo Pálido', 'Amarillento', 'Marrón'];
   olores = ['Olor Extrano', 'Olor a Humedad', 'limpio'];

@@ -1,6 +1,6 @@
 <div class="p-6 space-y-6">
     <h1 class="text-2xl font-bold">Muestras</h1>
-  
+
     <!-- Contenedor para el buscador y el botón -->
     <div class="w-full flex justify-between items-center">
       <!-- Input de búsqueda -->
@@ -10,7 +10,7 @@
         class="border border-gray-300 rounded px-4 py-2 w-2/3 focus:outline-none focus:ring-2 focus:ring-[#f4a261]"
         [(ngModel)]="filtro"
       />
-  
+
       <!-- Botón para agregar lote -->
       <button
         class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
@@ -18,15 +18,14 @@
         Agregar Muestra
       </button>
     </div>
-  
+
     <!-- Tabla reutilizable -->
     <app-table [columns]="columns" [data]="rows"></app-table>
-  
+
     <!-- Incluir el formulario de creación -->
-    <app-crear-lote
+    <app-crearmuestra
       *ngIf="mostrarModal"
       (onCerrar)="cerrarModal()"
       (onAnalisisCreado)="guardarAnalisis()">
-    </app-crear-lote>
+    </app-crearmuestra>
   </div>
-  

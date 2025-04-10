@@ -1,0 +1,141 @@
+<p>crear-analisis works!</p>
+<div class="fixed inset-0   bg-opacity-50 backdrop-blur-md  flex justify-center items-center  z-50"
+  (click)="cerrar()">
+
+  <div class="bg-gray-900  rounded-lg shadow-lg p-6 w-full max-w-5xl relative" (click)="$event.stopPropagation()">
+
+
+
+    <h2 class="text-xl font-bold text-white text-center mb-4">Nuevo Análisis Fisico</h2>
+
+    <!-- Botón de cerrar -->
+    <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
+
+    <div class="grid grid-cols-4 gap-4">
+      <label class="block">
+        <span class="text-white">Peso Muestra (g)</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_muestra" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Peso Pergamino (g)</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_pergamino" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">WA</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.wa" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Temperatura WA</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.temperatura_wa" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Humedad (%)</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.humedad" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Temp. Humedad</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.temperatura_humedad" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Densidad</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.densidad" />
+      </label>
+
+      <!-- COMBOBOX: COLOR -->
+      <label class="block">
+        <span class="text-white">Color Grano Verde</span>
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.color_grano_verde">
+          <option *ngFor="let color of colores" [value]="color">{{ color }}</option>
+        </select>
+      </label>
+
+      <!-- COMBOBOX: OLOR -->
+      <label class="block">
+        <span class="text-white">Olor</span>
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.olor">
+          <option *ngFor="let olor of olores" [value]="olor">{{ olor }}</option>
+        </select>
+      </label>
+
+      <label class="block">
+        <span class="text-white">Sup. Malla 18</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_18" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Sup. Malla 16</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_16" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Sup. Malla 14</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_14" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Menor Malla 16</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.menor_malla_16" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Peso Defectos</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_defectos" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Quaquers</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.quaquers" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Peso Muestra Tostada</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_muestra_tostada" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Desarrollo</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.desarrollo" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">% Caramelización</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.pocentaje_caramelizcacion" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">C. Desarrollo</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.c_desarrollo" />
+      </label>
+
+      <!-- COMBOBOX: GRADO -->
+      <label class="block">
+        <span class="text-white">Grado</span>
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.grado">
+          <option *ngFor="let grado of grados" [value]="grado">{{ grado }}</option>
+        </select>
+      </label>
+
+    </div>
+
+    <label class="block w-full col-span-2 mt-4">
+      <span class="text-white">Comentario</span>
+      <textarea class="w-full px-3  py-2 h-[150px] rounded bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.comentario"></textarea>
+    </label>
+
+    <div class="flex justify-center mt-4 space-x-4">
+      <button type="button" class="bg-gray-600 px-4 py-2 rounded text-white hover:bg-gray-500 transition"
+        (click)="cerrar()">
+        Cancelar
+      </button>
+      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

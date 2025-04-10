@@ -5,7 +5,7 @@ import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
 import { LoteService } from '../../service/lote.service';
-import { EditarLoteComponent } from "../editar-lote/editar-lote/editar-lote.component";
+import { EditarLoteComponent } from "../editar-lote/editar-lote.component";
 
 
 @Component({
@@ -20,10 +20,14 @@ export class LoteComponent implements OnInit {
     private readonly loteService:LoteService,
   ){}
 
+  ngOnInit() {
+    this.getLotes();
+  }
+
   filtro: string = '';
   mostrarModal: boolean = false;
   mostrarModalLote: boolean = false;
-  loteIdActual: string = ''; 
+  loteIdActual: string = '';
 
   columns = [
     'id',
@@ -66,9 +70,6 @@ export class LoteComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getLotes();
-  }
 
 
   abrirModal() {
@@ -78,16 +79,16 @@ export class LoteComponent implements OnInit {
   cerrarModal() {
     this.mostrarModal = false;
     this.mostrarModalLote = false;
-    
+
   }
 
   actualizarLotes() {
     this.cerrarModal();
     this.getLotes();
   }
-  
+
   editRow(row: any) {
-    this.loteIdActual = row.id; 
+    this.loteIdActual = row.id;
     this.mostrarModalLote = true;
   }
 
@@ -98,6 +99,5 @@ export class LoteComponent implements OnInit {
       },
       error: (error) => console.error('Error al eliminar el lote:', error),
     });
-
   }
 }
