@@ -28,7 +28,7 @@ export class AnalisisFisicoComponent implements OnInit {
   filtro: string = '';
   mostrarModal: boolean = false;
   mostrarModalEditar: boolean = false;
-  loteIdActual : string = '';
+  AnalisisIdActual : string = '';
 
   columns = [
     'fecha_registro',
@@ -72,7 +72,7 @@ export class AnalisisFisicoComponent implements OnInit {
   }
 
   editarAnalisis(row:any){
-    this.loteIdActual = row.id;
+    this.AnalisisIdActual = row.id;
     this.mostrarModalEditar = true;
   }
 

@@ -2,32 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../enviroments/enviroments';
-import { AnalisisSensorial } from '../../../../interfaces/analisisSensorial.interface';
+import { AnalisisRapido } from '../../../../interfaces/analisisRapido.interface';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnalisisSensorialService {
+export class AnalisisRapidoService {
 
-  private baseUrl = `${environment.apiUrl}/analisisSensorial`;
+  private baseUrl = `${environment.apiUrl}/analisisRapido`;
 
   constructor(private http: HttpClient) {}
 
-  createAnalisis(data: AnalisisSensorial): Observable<AnalisisSensorial> {
-    return this.http.post<AnalisisSensorial>(`${this.baseUrl}`, data);
+  createAnalisis(data: AnalisisRapido): Observable<AnalisisRapido> {
+    return this.http.post<AnalisisRapido>(`${this.baseUrl}`, data);
   }
 
-  getAnalisisById(id: string): Observable<AnalisisSensorial> {
-    return this.http.get<AnalisisSensorial>(`${this.baseUrl}/${id}`);
+  getAnalisisById(id: string): Observable<AnalisisRapido> {
+    return this.http.get<AnalisisRapido>(`${this.baseUrl}/${id}`);
   }
 
-  updateAnalisis(id: string, data: AnalisisSensorial): Observable<AnalisisSensorial> {
-    return this.http.put<AnalisisSensorial>(`${this.baseUrl}/${id}`, data);
+  updateAnalisis(id: string, data: AnalisisRapido): Observable<AnalisisRapido> {
+    return this.http.put<AnalisisRapido>(`${this.baseUrl}/${id}`, data);
   }
 
-  getAllAnalisis(): Observable<AnalisisSensorial[]> {
-    return this.http.get<AnalisisSensorial[]>(`${this.baseUrl}/all`);
+  getAllAnalisis(): Observable<AnalisisRapido[]> {
+    return this.http.get<AnalisisRapido[]>(`${this.baseUrl}`);
   }
 
   deleteAnalisis(id: string): Observable<void> {

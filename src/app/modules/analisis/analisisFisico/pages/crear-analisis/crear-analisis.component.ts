@@ -1,6 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AnalisisFisicoService } from '../../service/analisis-fisico.service';
+import { AnalisisFisico } from '../../../../../interfaces/analisisFisico.interface';
 
 @Component({
   selector: 'app-crear-analisis',
@@ -9,43 +11,57 @@ import { FormsModule } from '@angular/forms';
   styles: ''
 })
 export class CrearAnalisisFisicoComponent {
+  
+  constructor(
+    private readonly analisisFisicoService: AnalisisFisicoService,
+  ) {}
 
   colores = ['Azul verde', 'Azulado Verde', 'Verde', 'Verdoso', 'Amarillo verde', 'Amarillo Pálido', 'Amarillento', 'Marrón'];
   olores = ['Olor Extrano', 'Olor a Humedad', 'limpio'];
   grados = ['Especial', 'Grado 1', 'Grado 2', 'Grado 3', 'Convencional'];
 
+  @Input() id: string = "";
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
-  nuevoAnalisis = {
-    peso_muestra: null,
-    peso_pergamino: null,
-    wa: null,
-    temperatura_wa: null,
-    humedad: null,
-    temperatura_humedad: null,
-    densidad: null,
+  nuevoAnalisis:AnalisisFisico = {
+    peso_muestra: 0,
+    peso_pergamino: 0,
+    wa: 0,
+    temperatura_wa: 0,
+    humedad: 0,
+    temperatura_humedad: 0,
+    densidad: 0,
     color_grano_verde: '',
     olor: '',
-    superior_malla_18: null,
-    superior_malla_16: null,
-    superior_malla_14: null,
-    menor_malla_16: null,
-    peso_defectos: null,
-    quaquers: null,
-    peso_muestra_tostada: null,
-    desarrollo: null,
-    pocentaje_caramelizcacion: null,
-    c_desarrollo: null,
+    superior_malla_18: 0,
+    superior_malla_16: 0,
+    superior_malla_14: 0,
+    menor_malla_16: 0,
+    peso_defectos: 0,
+    quaquers: 0,
+    peso_muestra_tostada: 0,
+    desarrollo: 0,
+    pocentaje_caramelizcacion: 0,
+    c_desarrollo: 0,
     grado: '',
     comentario: '',
     defectos_primarios: [],
-    defectos_secundarios: []
+    defectos_secundarios: [],
+    id_analisis_fisico: '',
+    fecha_registro: new Date(),
   };
 
   guardar() {
-    this.onAnalisisCreado.emit();
-    this.cerrar();
+    this.analisisFisicoService.createAnalisis(this.nuevoAnalisis).subscribe({
+      next: (res) => {
+        this.onAnalisisCreado.emit();
+        this.cerrar();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
   cerrar() {

@@ -53,7 +53,6 @@ export class EditarLoteComponent implements OnInit {
 
     this.loteService.updateLote(this.id, this.nuevoLote).subscribe({
       next: (response) => {
-        console.log('✅ Lote actualizado correctamente');
         this.onAnalisisCreado.emit();
         this.cerrar();
       },

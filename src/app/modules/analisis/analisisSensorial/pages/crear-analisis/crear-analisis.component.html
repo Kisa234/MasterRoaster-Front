@@ -16,69 +16,95 @@
     <div class="grid grid-cols-4 gap-4">
       <label class="block">
         <span class="text-white">Fragancia / Aroma</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.fragancia_aroma" />
+        <input type="number" 
+          min="6" max="10" step="0.5"
+          (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.fragancia_aroma" />
       </label>
 
       <label class="block">
         <span class="text-white">Sabor</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.sabor" />
+        <input type="number" 
+          min="6" max="10" step="0.5"
+          (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.sabor" />
       </label>
 
       <label class="block">
         <span class="text-white">Sabor Residual</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.sabor_residual" />
+        <input type="number"        
+          min="6" max="10" step="0.5"
+          (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.sabor_residual" />
       </label>
 
       <label class="block">
         <span class="text-white">Acidez</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.acidez" />
+        <input type="number" 
+          min="6" max="10" step="0.5"
+          (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.acidez" />
       </label>
 
       <label class="block">
         <span class="text-white">Cuerpo</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.cuerpo" />
+        <input type="number"       
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.cuerpo" />
       </label>
 
       <label class="block">
         <span class="text-white">Uniformidad</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.uniformidad" />
+        <input type="number"       
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.uniformidad" />
       </label>
 
       <label class="block">
         <span class="text-white">Balance</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.balance" />
+        <input type="number"        
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.balance" />
       </label>
 
       <!-- COMBOBOX: COLOR -->
       <label class="block">
         <span class="text-white">Taza Limpia</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.taza_limpia" />
+        <input type="number"       
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.taza_limpia" />
       </label>
 
       <!-- COMBOBOX: OLOR -->
       <label class="block">
         <span class="text-white">Dulzor</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.dulzor" />
+        <input type="number"        
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.dulzor" />
       </label>
 
       <label class="block">
         <span class="text-white">General</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.puntaje_catador" />
+        <input type="number"        
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.puntaje_catador" />
       </label>
 
       <label class="block">
         <span class="text-white"># Taza defecto leve</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.taza_defecto_ligero" />
+        <input type="number"        
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.taza_defecto_ligero" />
       </label>
 
       <label class="block">
         <span class="text-white"># Taza defecto fuerte</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.tazas_defecto_rechazo" />
+        <input type="number"       
+        min="6" max="10" step="0.5"
+        (ngModelChange)="calcularPuntajeTaza()" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.tazas_defecto_rechazo" />
       </label>
 
       <label class="block">
         <span class="text-white">Puntaje Taza</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.puntaje_taza" />
+        <input type="number" 
+              class=" rounded px-3 py-2 w-full bg-gray-800 text-white" 
+              [(ngModel)]="nuevoAnalisis.puntaje_taza" />
       </label>
 
 
@@ -95,7 +121,8 @@
         (click)="cerrar()">
         Cancelar
       </button>
-      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition">
+      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition"
+        (click)="guardar()">
         Guardar
       </button>
     </div>

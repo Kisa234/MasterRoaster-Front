@@ -20,12 +20,25 @@
   </div>
 
   <!-- Tabla reutilizable -->
-  <app-table [columns]="columns" [data]="rows"></app-table>
-
+  <app-table 
+    [columns]="columns"
+    [data]="rows"
+    [onEdit]="editarAnalisis.bind(this)"
+    [onDelete]="eliminarAnalisis.bind(this)">
+  </app-table>
+  
   <!-- Incluir el formulario de creación -->
   <app-crear-analisis-sensorial
     *ngIf="mostrarModal"
     (onCerrar)="cerrarModal()"
-    (onAnalisisCreado)="guardarAnalisis()">
+    (onAnalisisCreado)="actualizarAnalisis()">
   </app-crear-analisis-sensorial>
+
+  <!-- Incluir el formulario de edición -->
+  <app-editar-analisis-sensorial
+    *ngIf="mostrarModalEditar"
+    [id]="AnalisisIdActual"
+    (onCerrar)="cerrarModal()"
+    (onAnalisisEditado)="actualizarAnalisis()">
+  </app-editar-analisis-sensorial>
 </div>

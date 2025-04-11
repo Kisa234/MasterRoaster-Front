@@ -68,6 +68,15 @@ export class EditarAnalisisFisicoComponent implements OnInit {
 
 
   guardar() {
+    this.analisisFisicoService.updateAnalisis(this.id,this.nuevoAnalisis)
+        .subscribe({
+          next: (response) => {
+           
+          },
+          error: (error) => console.error('Error al guardar el analisis:', error)
+        });
+
+
     this.onAnalisisCreado.emit();
     this.cerrar();
   }

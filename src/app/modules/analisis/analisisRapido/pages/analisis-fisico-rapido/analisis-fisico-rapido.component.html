@@ -20,12 +20,25 @@
   </div>
 
   <!-- Tabla reutilizable -->
-  <app-table [columns]="columns" [data]="rows"></app-table>
+  <app-table 
+    [columns]="columns"
+    [data]="rows"
+    [onEdit]="editarAnalisis.bind(this)"
+    [onDelete]="eliminarAnalisis.bind(this)">
+  </app-table>
 
   <!-- Incluir el formulario de creación -->
   <app-form-analisis-rapido
     *ngIf="mostrarModal"
     (onCerrar)="cerrarModal()"
-    (onAnalisisCreado)="guardarAnalisis($event)">
+    (onAnalisisCreado)="actualizarAnalisis()">
   </app-form-analisis-rapido>
+
+  <!-- Formulario de edicion -->
+  <app-editar-analisis-rapido
+    *ngIf="mostrarModalEditar"
+    [id]="AnalisisIdActual"
+    (onCerrar)="cerrarModal()"
+    (onAnalisisEditado)="actualizarAnalisis()">
+  </app-editar-analisis-rapido>
 </div>

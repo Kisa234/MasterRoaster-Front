@@ -43,7 +43,7 @@
     <!-- Editar Analisis -->
     <app-editar-analisis-fisico
       *ngIf="mostrarModalEditar"
-      [id] = "loteIdActual"
+      [id] = "AnalisisIdActual"
       (onCerrar)="cerrarModal()"
       (onAnalisisEditado)="actualizarAnalisis()">
     </app-editar-analisis-fisico>
