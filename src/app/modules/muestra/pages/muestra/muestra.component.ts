@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CrearmuestraComponent } from "../crear-muestra/crear-muestra.component";
 import { MuestraService } from '../../service/muestra.service';
+import { EditarMuestraComponent } from "../editar-muestra/editar-muestra.component";
 
 @Component({
   selector: 'app-muestra',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearmuestraComponent, CrearmuestraComponent],
+  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearmuestraComponent, CrearmuestraComponent, EditarMuestraComponent],
   templateUrl: './muestra.component.html',
   styles:""
 })
@@ -25,24 +26,40 @@ export class MuestraComponent implements OnInit{
 
   filtro: string = '';
   mostrarModal: boolean = false;
+  mostrarModalMuestra: boolean = false;
+  muestraIdActual: string = '';
 
   columns = [
-    'Nombre',
-    'Peso',
-    'Cliente',
-    'Fecha de Registro',
+    'id',
+    'productor',
+    'finca',
+    'region',
+    'departamento',
+    'peso',
+    'variedades'
   ];
 
-  rows: { Nombre: string; Peso: number; Cliente: string; fecha: Date }[] = [];
-
+  rows: {
+    id: any;
+    productor: string;
+    finca: string;
+    region: string;
+    departamento: string;
+    peso: number;
+    variedades: string;
+  }[] = [];
+ 
   getMuestras() {
     this.muestraService.getMuestras().subscribe((res) => {
       this.rows = res.map((muestra) => {
         return {
-          Nombre: muestra.nombre,
-          Peso: muestra.peso,
-          Cliente: muestra.user_id,
-          fecha: muestra.fecha_registro,
+          id: muestra.id_muestra,
+          productor: muestra.productor,
+          finca: muestra.finca,
+          region: muestra.region,
+          departamento: muestra.departamento,
+          peso: muestra.peso,
+          variedades: muestra.variedades,
         };
       });
     });
@@ -55,7 +72,28 @@ export class MuestraComponent implements OnInit{
 
   cerrarModal() {
     this.mostrarModal = false;
+    this.mostrarModalMuestra = false;
   }
+
+  actualizarMuestra() {
+    this.cerrarModal();
+    this.getMuestras();
+  }
+
+  editRow(row: any) {
+    this.muestraIdActual = row.id;
+    this.mostrarModalMuestra = true;
+  }
+
+  deleteRow(row: any) {
+    this.muestraService.deleteMuestra(row.id).subscribe({
+      next: () => {
+        this.getMuestras();
+      },
+      error: (error) => console.error('Error al eliminar el lote:', error),
+    });
+  }
+  
 
   guardarAnalisis() {
 

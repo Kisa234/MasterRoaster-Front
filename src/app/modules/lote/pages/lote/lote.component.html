@@ -17,6 +17,13 @@
       (click)="abrirModal()">
       Agregar Lote
     </button>
+    
+    <!-- Botón para agregar lote de muestra -->
+    <button
+      class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
+      (click)="abrirModalMuestra()">
+      Lote de Muestra
+    </button>
   </div>
 
   <!-- Tabla reutilizable -->
@@ -41,4 +48,10 @@
     (onCerrar)="cerrarModal()"
     (onAnalisisCreado)="actualizarLotes()">
   </app-editar-lote>
+
+  <app-lote-muestra
+    *ngIf="mostrarModalLoteMuestra"
+    (onCerrar)="cerrarModal()"
+    (onAnalisisCreado)="actualizarLotes()">
+  </app-lote-muestra>
 </div>

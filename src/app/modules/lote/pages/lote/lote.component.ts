@@ -6,16 +6,16 @@ import { FormsModule } from '@angular/forms';
 import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
 import { LoteService } from '../../service/lote.service';
 import { EditarLoteComponent } from "../editar-lote/editar-lote.component";
+import { LoteMuestraComponent } from "../lote-muestra/lote-muestra.component";
 
 
 @Component({
   selector: 'app-lote',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent, EditarLoteComponent],
+  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent, EditarLoteComponent, LoteMuestraComponent],
   templateUrl: './lote.component.html',
 
 })
 export class LoteComponent implements OnInit {
-
   constructor(
     private readonly loteService:LoteService,
   ){}
@@ -27,6 +27,7 @@ export class LoteComponent implements OnInit {
   filtro: string = '';
   mostrarModal: boolean = false;
   mostrarModalLote: boolean = false;
+  mostrarModalLoteMuestra: boolean = false;
   loteIdActual: string = '';
 
   columns = [
@@ -35,18 +36,16 @@ export class LoteComponent implements OnInit {
     'finca',
     'region',
     'departamento',
-    'fecha_compra',
     'peso',
     'variedades'
   ];
 
   rows: {
-    id: any;
+    id: string;
     productor: string;
     finca: string;
     region: string;
     departamento: string;
-    fecha_compra: Date;
     peso: number;
     variedades: string;
   }[] = [];
@@ -56,12 +55,11 @@ export class LoteComponent implements OnInit {
     this.loteService.getLotes().subscribe({
       next: (response) => {
         this.rows = response.map((lote) => ({
-          id: lote.id_lote,
+          id: lote.id_lote!,
           productor: lote.productor,
           finca: lote.finca,
           region: lote.region,
           departamento: lote.departamento,
-          fecha_compra: lote.fecha_compra,
           peso: lote.peso,
           variedades: lote.variedades,
         }));
@@ -76,9 +74,14 @@ export class LoteComponent implements OnInit {
     this.mostrarModal = true;
   }
 
+  abrirModalMuestra() {
+    this.mostrarModalLoteMuestra = true;
+  }
+
   cerrarModal() {
     this.mostrarModal = false;
     this.mostrarModalLote = false;
+    this.mostrarModalLoteMuestra = false;
 
   }
 

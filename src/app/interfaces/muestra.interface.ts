@@ -2,11 +2,16 @@
 
 export interface Muestra {
 
-  nombre: string,
+  id_muestra?: string,
+  productor: string,
+  finca: string,
+  region: string,
+  departamento: string,
   peso: number,
-  fecha_registro:Date,
-  user_id:string,
-  analisis_id?: string,
-  eliminado?: boolean
-
+  variedades: string,
+  proceso: string,
+  fecha_registro?: Date, 
+  eliminado?: boolean,
+  user_id?: string ,
+  analisis_id?: string ,
 }

@@ -14,7 +14,7 @@ export class CrearLoteComponent {
   constructor(private readonly loteService: LoteService) {}
 
   @Output() onCerrar = new EventEmitter<void>();
-  @Output() onAnalisisCreado = new EventEmitter<any>();
+  @Output() onCreate = new EventEmitter<any>();
 
   procesos = [
     'Lavado',
@@ -28,7 +28,6 @@ export class CrearLoteComponent {
     finca: '',
     region: '',
     departamento: '',
-    fecha_compra: new Date(),
     peso: 0,
     variedades: '',
     proceso: '',
@@ -38,7 +37,7 @@ export class CrearLoteComponent {
     this.nuevoLote.peso = Number(this.nuevoLote.peso);
     this.loteService.createLote(this.nuevoLote).subscribe({
       next: (response) => {
-        this.onAnalisisCreado.emit();
+        this.onCreate.emit();
         this.cerrar();
       },
       error: (error) => console.error('Error al crear el lote:', error)

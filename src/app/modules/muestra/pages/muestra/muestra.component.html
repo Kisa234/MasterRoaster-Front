@@ -20,12 +20,28 @@
     </div>
 
     <!-- Tabla reutilizable -->
-    <app-table [columns]="columns" [data]="rows"></app-table>
+    <app-table 
+      [columns]="columns"
+      [data]="rows"
+      [onEdit]="editRow.bind(this)"
+      [onDelete]="deleteRow.bind(this)"
+      >
+    </app-table>
 
     <!-- Incluir el formulario de creación -->
     <app-crearmuestra
       *ngIf="mostrarModal"
       (onCerrar)="cerrarModal()"
-      (onAnalisisCreado)="guardarAnalisis()">
+      (onAnalisisCreado)="actualizarMuestra()">
     </app-crearmuestra>
+
+
+    <!-- Incluir el formulario de edición -->
+    <app-editar-muestra
+      *ngIf="mostrarModalMuestra"
+      [id]="muestraIdActual"
+      (onCerrar)="cerrarModal()"
+      (onAnalisisCreado)="actualizarMuestra()">
+    </app-editar-muestra>
+    
   </div>

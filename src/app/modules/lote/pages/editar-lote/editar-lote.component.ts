@@ -28,7 +28,7 @@ export class EditarLoteComponent implements OnInit {
 
   @Input()  id: string = '';
   @Output() onCerrar = new EventEmitter<void>();
-  @Output() onAnalisisCreado = new EventEmitter<any>();
+  @Output() onCreate = new EventEmitter<any>();
 
   procesos = [
     'Lavado',
@@ -42,18 +42,15 @@ export class EditarLoteComponent implements OnInit {
     finca: '',
     region: '',
     departamento: '',
-    fecha_compra: new Date(),
     peso: 0,
     variedades: '',
     proceso: '',
   };
 
   submit() {
-    this.nuevoLote.peso = Number(this.nuevoLote.peso);
-
     this.loteService.updateLote(this.id, this.nuevoLote).subscribe({
       next: (response) => {
-        this.onAnalisisCreado.emit();
+        this.onCreate.emit();
         this.cerrar();
       },
       error: (error) => console.error('Error al actualizar el lote:', error)
@@ -64,9 +61,5 @@ export class EditarLoteComponent implements OnInit {
     this.onCerrar.emit();
   }
 
-  getFechaCompra(): string {
-    if (!this.nuevoLote.fecha_compra) return '';
-    const fecha = this.nuevoLote.fecha_compra instanceof Date ? this.nuevoLote.fecha_compra : new Date(this.nuevoLote.fecha_compra);
-    return fecha.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-  }
+  
 }

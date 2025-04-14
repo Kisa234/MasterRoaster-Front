@@ -11,11 +11,9 @@ export class LoteService {
   private baseUrl = `${environment.apiUrl}/lote`;
 
   constructor(private http: HttpClient) {
-    console.log('✅ LoteService inicializado correctamente');
   }
 
   createLote(data: Lote): Observable<Lote> {
-    console.log('📤 Enviando datos al backend:', data);
     return this.http.post<Lote>(this.baseUrl, data);
   }
 
@@ -34,4 +32,8 @@ export class LoteService {
   getLotes(): Observable<Lote[]> {
     return this.http.get<Lote[]>(`${this.baseUrl}`);
   }
+
+  createLoteFromMuestra(id_muestra:string, peso:number): Observable<Lote>{
+    return this.http.post<Lote>(`${this.baseUrl}/muestra/${id_muestra}`, {peso});
+  }  
 }

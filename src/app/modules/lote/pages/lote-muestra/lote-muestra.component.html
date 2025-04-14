@@ -1,0 +1,43 @@
+
+
+
+<div class="fixed inset-0   bg-opacity-50 backdrop-blur-md  flex justify-center items-center  z-50"
+  (click)="cerrar()">
+
+  <div class="bg-gray-900  rounded-lg shadow-lg p-6 w-full max-w-5xl relative" (click)="$event.stopPropagation()">
+
+
+
+    <h2 class="text-xl font-bold text-white text-center mb-4">Nuevo Lote</h2>
+
+    <!-- Botón de cerrar -->
+    <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
+
+    <div class="grid grid-cols-2 gap-4">
+      <label class="block">
+        <span class="text-white">Peso</span>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoLote.peso" />
+      </label>
+
+      <label class="block">
+        <span class="text-white">Muestra </span>
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoLote.id_muestra">
+          <option *ngFor="let muestra of muestras" [value]="muestra">{{ muestra }}</option>
+        </select>
+      </label>
+
+    </div>
+
+
+    <div class="flex justify-center mt-6 space-x-4">
+      <button type="button" class="bg-gray-600 px-4 py-2 rounded text-white hover:bg-gray-500 transition"
+        (click)="cerrar()">
+        Cancelar
+      </button>
+      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition"
+        (click)="submit()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
