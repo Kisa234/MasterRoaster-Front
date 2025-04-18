@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CrearLoteComponent } from '../../../lote/pages/crear-lote/crear-lote.component';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { CrearmuestraComponent } from "../crear-muestra/crear-muestra.component";
 import { MuestraService } from '../../service/muestra.service';
-import { EditarMuestraComponent } from "../editar-muestra/editar-muestra.component";
+import { CrearmuestraComponent } from '../../components/crear-muestra/crear-muestra.component';
+import { EditarMuestraComponent } from '../../components/editar-muestra/editar-muestra.component';
 
 @Component({
   selector: 'app-muestra',
@@ -48,7 +47,7 @@ export class MuestraComponent implements OnInit{
     peso: number;
     variedades: string;
   }[] = [];
- 
+
   getMuestras() {
     this.muestraService.getMuestras().subscribe((res) => {
       this.rows = res.map((muestra) => {
@@ -93,7 +92,7 @@ export class MuestraComponent implements OnInit{
       error: (error) => console.error('Error al eliminar el lote:', error),
     });
   }
-  
+
 
   guardarAnalisis() {
 

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { RouterModule } from '@angular/router';
+import { TuesteService } from '../../service/service.service';
+import { Pedido } from '../../../../interfaces/pedido.interface';
+import { PedidoService } from '../../../pedidos/service/pedido.service';
 
 @Component({
   selector: 'app-tueste',
@@ -14,10 +17,12 @@ export class TuesteComponent {
 
 
   constructor(
+    private tuesteService: TuesteService,
+    private pedidoService: PedidoService,
   ){}
 
   ngOnInit() {
-    this.getLotes();
+    this.getTuestes();
   }
 
   filtro: string = '';
@@ -28,33 +33,26 @@ export class TuesteComponent {
   today = Date.now();
 
   columns = [
-    'id',
-    'productor',
-    'finca',
-    'region',
-    'departamento',
-    'peso',
-    'variedades'
+
+    'Id Lote',
+    'Fecha Tueste',
+    'Peso (Kg)',
+    'Observaciones',
+    'Completar',
   ];
 
   rows: {
-    id: string;
-    productor: string;
-    finca: string;
-    region: string;
-    departamento: string;
-    peso: number;
-    variedades: string;
+    'Id Lote' : string,
+    'Fecha Tueste' : string,
+    'Peso (Kg)' : string,
+    'Observaciones' : string,
+    'Completar' : string,
   }[] = [];
 
 
-  getLotes(){
+  getTuestes(){
 
   }
-
-
-
-
 
   editRow(row: any) {
     this.loteIdActual = row.id;

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TableComponent } from "../../../../shared/components/table/table.component";
 import { FormsModule, NgModel } from '@angular/forms';
+import { PedidoService } from '../../service/pedido.service';
 
 @Component({
   selector: 'app-pedido',
@@ -11,10 +12,11 @@ import { FormsModule, NgModel } from '@angular/forms';
 export class PedidoComponent {
 
   constructor(
+    private readonly pedidoService: PedidoService
   ){}
 
   ngOnInit() {
-    this.getLotes();
+    this.getPedidos();
   }
 
   filtro: string = '';
@@ -26,32 +28,36 @@ export class PedidoComponent {
 
   columns = [
     'id',
-    'productor',
-    'finca',
-    'region',
-    'departamento',
-    'peso',
-    'variedades'
+    'tipo pedido',
+    'cantidad (KG)',
+    'estado',
+    'lote',
   ];
 
   rows: {
     id: string;
-    productor: string;
-    finca: string;
-    region: string;
-    departamento: string;
-    peso: number;
-    variedades: string;
+    'tipo pedido': string;
+    'cantidad (kg)': number;
+    estado: string;
+    lote: string;
   }[] = [];
 
-
-  getLotes(){
-
+  getPedidos(){
+    this.pedidoService.getAllPedidos().subscribe({
+      next: (response) => {
+        this.rows = response.map((pedido) => ({
+          id: pedido.id_pedido!,
+          'tipo pedido': pedido.tipo_pedido,
+          'cantidad (kg)': pedido.cantidad,
+          estado: pedido.estado_pedido,
+          lote: pedido.id_lote
+        }));
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
-
-
-
-
 
   editRow(row: any) {
     this.loteIdActual = row.id;

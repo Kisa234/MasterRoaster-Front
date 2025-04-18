@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '../../../../shared/components/table/table.component';
+import { LoteTostadoService } from '../../service/lote-tostado.service';
+
 
 @Component({
   selector: 'app-lote-tostado',
@@ -8,12 +10,13 @@ import { TableComponent } from '../../../../shared/components/table/table.compon
   templateUrl: './lote-tostado.component.html',
   styles: ``
 })
-export class LoteTostadoComponent {
+export class LoteTostadoComponent implements OnInit {
   constructor(
+    private readonly loteTostadoService: LoteTostadoService,
   ){}
 
   ngOnInit() {
-    this.getLotes();
+    this.getLotesTostados();
   }
 
   filtro: string = '';
@@ -26,18 +29,29 @@ export class LoteTostadoComponent {
   columns = [
     'id',
     'perfil tostado',
-    'fecha registro'
+    'peso (KG)',
+    'fecha tostado'
   ];
 
   rows: {
     id: string;
-    perfil_tostado: string;
-    fecha_registro: string;
+    "perfil tostado": string;
+    "peso (KG)" : number;
+    "fecha tostado": string;
   }[] = [];
 
 
-  getLotes(){
-
+  getLotesTostados(){
+    this.loteTostadoService.getLotesTostados().subscribe({
+      next: (response) => {
+        this.rows = response.map((lote) => ({
+          id: lote.id_lote_tostado!,
+          "perfil tostado": lote.perfil_tostado,
+          "peso (KG)": lote.peso,
+          "fecha tostado": new Date(lote.fecha_tostado).toLocaleDateString('es-ES')
+        }));
+      }
+    });
   }
 
 

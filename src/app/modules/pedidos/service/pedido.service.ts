@@ -40,4 +40,8 @@ export class PedidoService {
   completarPedido(id: string): Observable<Pedido> {
     return this.http.put<Pedido>(`${this.baseUrl}/completar/${id}`, {});
   }
+
+  getAllPedidos(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.baseUrl}`);
+  }
 }

@@ -3,10 +3,10 @@ import { TableComponent } from '../../../../shared/components/table/table.compon
 import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CrearLoteComponent } from '../crear-lote/crear-lote.component';
 import { LoteService } from '../../service/lote.service';
-import { EditarLoteComponent } from "../editar-lote/editar-lote.component";
-import { LoteMuestraComponent } from "../lote-muestra/lote-muestra.component";
+import { CrearLoteComponent } from '../../components/crear-lote/crear-lote.component';
+import { EditarLoteComponent } from '../../components/editar-lote/editar-lote.component';
+import { LoteMuestraComponent } from '../../components/lote-muestra/lote-muestra.component';
 
 
 @Component({

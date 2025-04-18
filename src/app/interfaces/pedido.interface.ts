@@ -1,15 +1,13 @@
 export interface Pedido {
 
-  id_pedido       : string,
-  fecha_pedido    : Date,
-  tipo_tueste     : string,
-  cantidad_tostado: number,
-  estado_pedido   : string,
-  observaciones   : string,
-  cliente_id      : string,
-  asignado_a_id?  : string,
-  fecha_asignacion?: Date,
-  eliminado?      : boolean
-
+  id_pedido      : string,
+  fecha_registro : Date,
+  tipo_pedido    : string,
+  cantidad       : number,
+  estado_pedido  : string,
+  observaciones  : string,
+  id_user        : string,
+  id_lote        : string,
+  eliminado      : boolean,
 
 }
