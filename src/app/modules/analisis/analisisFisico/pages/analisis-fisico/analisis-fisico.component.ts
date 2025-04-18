@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TableComponent } from '../../../../../shared/components/table/table.component';
-import { CrearAnalisisFisicoComponent } from "../crear-analisis/crear-analisis.component";
+import { CrearAnalisisFisicoComponent } from "../../components/crear-analisis/crear-analisis.component";
 import { AnalisisFisicoService } from '../../service/analisis-fisico.service';
 import { AnalisisFisico } from '../../../../../interfaces/analisisFisico.interface';
-import { EditarAnalisisFisicoComponent } from '../editar-analisis-fisico/editar-analisis-fisico.component';
+import { EditarAnalisisFisicoComponent } from '../../components/editar-analisis-fisico/editar-analisis-fisico.component';
 
 
 @Component({

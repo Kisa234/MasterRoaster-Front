@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TableComponent } from '../../../../../shared/components/table/table.component';
 import { FormsModule } from '@angular/forms';
-import { CrearAnalisisSensorialComponent } from "../crear-analisis/crear-analisis.component";
+import { CrearAnalisisSensorialComponent } from "../../components/crear-analisis/crear-analisis.component";
 import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AnalisisSensorialService } from '../../service/analisis-sensorial.service';
-import { EditarAnalisisSensorialComponent } from '../editar-analisis-sensorial/editar-analisis-sensorial.component';
+import { EditarAnalisisSensorialComponent } from '../../components/editar-analisis-sensorial/editar-analisis-sensorial.component';
 
 @Component({
   selector: 'app-analisis-sensorial',
@@ -44,12 +44,12 @@ export class AnalisisSensorialComponent implements OnInit {
   ]
 
   getAllAnalisis() {
-    this.analisisService.getAllAnalisisSensorial().subscribe((res) => { 
+    this.analisisService.getAllAnalisisSensorial().subscribe((res) => {
         this.rows = res.map((analisis) => {
           return {
             id: analisis.id_analisis_sensorial,
-            fecha_registro: new Date(analisis.fecha_registro ?? new Date()).toLocaleDateString('es-ES'), 
-            puntaje: analisis.puntaje_taza.toString(), 
+            fecha_registro: new Date(analisis.fecha_registro ?? new Date()).toLocaleDateString('es-ES'),
+            puntaje: analisis.puntaje_taza.toString(),
             comentario: analisis.comentario
           }
         });

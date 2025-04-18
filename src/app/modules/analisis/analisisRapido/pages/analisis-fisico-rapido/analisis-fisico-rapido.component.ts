@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '../../../../../shared/components/table/table.component';
-import { CrearAnalisisComponent } from '../crear-analisis/crear-analisis.component';
+import { CrearAnalisisComponent } from '../../components/crear-analisis/crear-analisis.component';
 import { AnalisisRapidoService } from '../../service/analisis-rapido.service';
 import { AnalisisRapido } from '../../../../../interfaces/analisisRapido.interface';
-import { EditarAnalisisRapidoComponent } from "../editar-analisis-rapido/editar-analisis-rapido.component";
+import { EditarAnalisisRapidoComponent } from "../../components/editar-analisis-rapido/editar-analisis-rapido.component";
 
 
 
@@ -18,7 +18,7 @@ import { EditarAnalisisRapidoComponent } from "../editar-analisis-rapido/editar-
   styles: ''
 })
 export class AnalisisFisicoRapidoComponent implements OnInit {
-  
+
   constructor(
     private readonly analisisRapidoService: AnalisisRapidoService,
   ) { }
@@ -79,7 +79,7 @@ export class AnalisisFisicoRapidoComponent implements OnInit {
       }
     });
   }
-  
+
 
 
   abrirModal() {
