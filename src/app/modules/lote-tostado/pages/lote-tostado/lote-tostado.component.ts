@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { TableComponent } from "../../../../shared/components/table/table.component";
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { TableComponent } from '../../../../shared/components/table/table.component';
 
 @Component({
-  selector: 'app-pedido',
+  selector: 'app-lote-tostado',
   imports: [TableComponent, FormsModule],
-  templateUrl: './pedido.component.html',
-  styles:""
+  templateUrl: './lote-tostado.component.html',
+  styles: ``
 })
-export class PedidoComponent {
-
+export class LoteTostadoComponent {
   constructor(
   ){}
 
@@ -26,22 +25,14 @@ export class PedidoComponent {
 
   columns = [
     'id',
-    'productor',
-    'finca',
-    'region',
-    'departamento',
-    'peso',
-    'variedades'
+    'perfil tostado',
+    'fecha registro'
   ];
 
   rows: {
     id: string;
-    productor: string;
-    finca: string;
-    region: string;
-    departamento: string;
-    peso: number;
-    variedades: string;
+    perfil_tostado: string;
+    fecha_registro: string;
   }[] = [];
 
 

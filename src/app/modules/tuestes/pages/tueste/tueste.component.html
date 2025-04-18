@@ -1,1 +1,26 @@
-<p>tueste works!</p>
+<div class="p-6 space-y-6">
+  <h1 class="text-2xl font-bold">Tuestes</h1>
+
+  <!-- Contenedor para el buscador y el botón -->
+  <div class="w-full flex justify-content-start items-center">
+    <!-- Input de búsqueda -->
+     <label class="text-gray-700 font-semibold mr-6">Buscar por fecha:</label>
+    <input
+      type="date"
+      value=today
+      class="border border-gray-300 rounded px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-[#f4a261]"
+      [(ngModel)]="filtro"
+    />
+  </div>
+
+  <!-- Tabla reutilizable -->
+  <app-table
+    [columns]="columns"
+    [data]="rows"
+    [onEdit]="editRow.bind(this)"
+    [onDelete]="deleteRow.bind(this)"
+    >
+  </app-table>
+
+
+</div>
