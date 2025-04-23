@@ -61,5 +61,5 @@ export class EditarLoteComponent implements OnInit {
     this.onCerrar.emit();
   }
 
-  
+
 }

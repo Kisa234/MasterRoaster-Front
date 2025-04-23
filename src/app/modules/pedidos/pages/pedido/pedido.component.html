@@ -2,15 +2,21 @@
   <h1 class="text-2xl font-bold">Pedidos</h1>
 
   <!-- Contenedor para el buscador y el botón -->
-  <div class="w-full flex justify-content-start items-center">
+  <div class="w-full flex justify-between items-center">
     <!-- Input de búsqueda -->
-     <label class="text-gray-700 font-semibold mr-6">Buscar por fecha:</label>
     <input
-      type="date"
-      value=today
-      class="border border-gray-300 rounded px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-[#f4a261]"
+      type="text"
+      placeholder="Buscar por Usuario..."
+      class="border border-gray-300 rounded px-4 py-2 w-2/3 focus:outline-none focus:ring-2 focus:ring-[#f4a261]"
       [(ngModel)]="filtro"
     />
+
+    <!-- Botón para agregar Pedido -->
+    <button
+      class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
+      (click)="abrirModal()">
+      Agregar Pedido
+    </button>
   </div>
 
   <!-- Tabla reutilizable -->
@@ -19,8 +25,23 @@
     [data]="rows"
     [onEdit]="editRow.bind(this)"
     [onDelete]="deleteRow.bind(this)"
+    [onComplete]="completeRow.bind(this)"
+    [mostrarCompletar]="true"
     >
   </app-table>
 
+  <!-- Agregar Pedido -->
+  <app-crear-pedido
+  *ngIf="mostrarModal"
+  (onCerrar)="cerrarModal()"
+  (onAnalisisCreado)="actualizarPedidos()">
+  </app-crear-pedido>
+
+  <app-editar-pedido
+  *ngIf="mostrarModalPedido"
+  [id_pedido]="pedidoIdActual"
+  (onCerrar)="cerrarModal()"
+  (onAnalisisCreado)="actualizarPedidos()">
+  </app-editar-pedido>
 
 </div>

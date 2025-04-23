@@ -13,6 +13,7 @@ import { PedidoService } from '../../../pedidos/service/pedido.service';
   styles: ``
 })
 
+
 export class TuesteComponent {
 
 
@@ -38,7 +39,6 @@ export class TuesteComponent {
     'Fecha Tueste',
     'Peso (Kg)',
     'Observaciones',
-    'Completar',
   ];
 
   rows: {
@@ -46,12 +46,36 @@ export class TuesteComponent {
     'Fecha Tueste' : string,
     'Peso (Kg)' : string,
     'Observaciones' : string,
-    'Completar' : string,
   }[] = [];
 
 
-  getTuestes(){
 
+  html: string =
+    `
+    <button
+            class="bg-orange-400 hover:bg-orange-500 text-white px-3 py-1 rounded"
+            (click)="onDelete(row)">
+            Eliminar
+    </button>
+    `
+    ;
+
+
+  getTuestes(){
+    this.tuesteService.getAllTuestes().subscribe({
+      next: (response) => {
+        this.rows = response.map((tueste) => ({
+          'Id Lote': tueste.id_lote,
+          'Fecha Tueste': tueste.fecha_tueste,
+          'Peso (Kg)': tueste.peso,
+          'Observaciones': tueste.observaciones,
+
+        }));
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   editRow(row: any) {
@@ -61,5 +85,19 @@ export class TuesteComponent {
 
   deleteRow(row: any) {
 
+  }
+
+  abrirModal() {
+    this.mostrarModal = true;
+  }
+
+  cerrarModal() {
+    this.mostrarModal = false;
+    // this.mostrarModalMuestra = false;
+  }
+
+  actualizarMuestra() {
+    this.cerrarModal();
+    this.getTuestes();
   }
 }

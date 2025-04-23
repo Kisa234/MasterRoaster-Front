@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { TableComponent } from "../../../../shared/components/table/table.component";
 import { FormsModule, NgModel } from '@angular/forms';
 import { PedidoService } from '../../service/pedido.service';
+import { CrearPedidoComponent } from "../../components/crear-pedido/crear-pedido.component";
+import { NgIf } from '@angular/common';
+import { EditarPedidoComponent } from "../../components/editar-pedido/editar-pedido.component";
 
 @Component({
   selector: 'app-pedido',
-  imports: [TableComponent, FormsModule],
+  imports: [TableComponent, FormsModule, CrearPedidoComponent, NgIf, EditarPedidoComponent],
   templateUrl: './pedido.component.html',
   styles:""
 })
@@ -21,25 +24,22 @@ export class PedidoComponent {
 
   filtro: string = '';
   mostrarModal: boolean = false;
-  mostrarModalLote: boolean = false;
-  mostrarModalLoteMuestra: boolean = false;
-  loteIdActual: string = '';
-  today = Date.now();
+  mostrarModalPedido: boolean = false;
+  pedidoIdActual: string = '';
 
   columns = [
-    'id',
+    'lote',
     'tipo pedido',
     'cantidad (KG)',
     'estado',
-    'lote',
   ];
 
   rows: {
     id: string;
-    'tipo pedido': string;
-    'cantidad (kg)': number;
-    estado: string;
     lote: string;
+    'tipo pedido': string;
+    'cantidad (KG)': number;
+    estado: string;
   }[] = [];
 
   getPedidos(){
@@ -47,10 +47,10 @@ export class PedidoComponent {
       next: (response) => {
         this.rows = response.map((pedido) => ({
           id: pedido.id_pedido!,
-          'tipo pedido': pedido.tipo_pedido,
-          'cantidad (kg)': pedido.cantidad,
-          estado: pedido.estado_pedido,
-          lote: pedido.id_lote
+          lote: pedido.id_lote!,
+          'tipo pedido': pedido.tipo_pedido!,
+          'cantidad (KG)': pedido.cantidad!,
+          estado: pedido.estado_pedido!,
         }));
       },
       error: (error) => {
@@ -59,12 +59,44 @@ export class PedidoComponent {
     })
   }
 
-  editRow(row: any) {
-    this.loteIdActual = row.id;
-    this.mostrarModalLote = true;
+  deleteRow(row: any) {
+    this.pedidoService.deletePedido(row.id).subscribe({
+      next: (response) => {
+        this.getPedidos();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
-  deleteRow(row: any) {
+  completeRow(row: any) {
+    this.pedidoService.completarPedido(row.id).subscribe({
+      next: (response) => {
+        this.getPedidos();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 
+  editRow(row: any) {
+    this.pedidoIdActual = row.id;
+    this.mostrarModalPedido = true;
+  }
+
+  abrirModal() {
+    this.mostrarModal = true;
+  }
+
+  cerrarModal() {
+    this.mostrarModal = false;
+    this.mostrarModalPedido = false;
+  }
+
+  actualizarPedidos() {
+    this.cerrarModal();
+    this.getPedidos();
   }
 }

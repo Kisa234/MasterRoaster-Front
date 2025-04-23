@@ -34,7 +34,7 @@ export class MuestraComponent implements OnInit{
     'finca',
     'region',
     'departamento',
-    'peso',
+    'peso (Gr)',
     'variedades'
   ];
 
@@ -44,7 +44,7 @@ export class MuestraComponent implements OnInit{
     finca: string;
     region: string;
     departamento: string;
-    peso: number;
+    'peso (Gr)': number;
     variedades: string;
   }[] = [];
 
@@ -57,7 +57,7 @@ export class MuestraComponent implements OnInit{
           finca: muestra.finca,
           region: muestra.region,
           departamento: muestra.departamento,
-          peso: muestra.peso,
+          'peso (Gr)': muestra.peso,
           variedades: muestra.variedades,
         };
       });

@@ -10,6 +10,7 @@ import { environment } from '../../../../enviroments/enviroments';
 export class TuesteService {
 
   private readonly baseUrl = `${environment.apiUrl}/tueste`;
+  private readonly baseUrlP = `${environment.apiUrl}/p`;
 
   constructor(private http: HttpClient) {}
 
@@ -31,5 +32,10 @@ export class TuesteService {
 
   getTuesteByFecha(fecha: string): Observable<Tueste[]> {
     return this.http.get<Tueste[]>(`${this.baseUrl}/fecha/${fecha}`);
+  }
+
+  getAllTuestes(): Observable<any[]> {
+    // return this.http.get<Tueste[]>(`${this.baseUrl}`);
+    return this.http.get<any[]>(`${this.baseUrlP}`);
   }
 }

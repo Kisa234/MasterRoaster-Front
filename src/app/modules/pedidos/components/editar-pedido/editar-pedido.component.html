@@ -8,7 +8,7 @@
 
 
 
-    <h2 class="text-xl font-bold text-white text-center mb-4">Nuevo Pedido</h2>
+    <h2 class="text-xl font-bold text-white text-center mb-4">Editar Pedido</h2>
 
     <!-- Botón de cerrar -->
     <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
@@ -17,26 +17,26 @@
 
       <label class="block">
         <span class="text-white">Tipo Pedido</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.tipo_pedido">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="pedido.tipo_pedido" disabled >
           <option *ngFor="let tipo of TipoPedido" [value]="tipo">{{ tipo }}</option>
         </select>
       </label>
 
       <label class="block">
         <span class="text-white">Cantidad</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.cantidad"/>
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="pedido.cantidad"/>
       </label>
 
       <label class="block">
         <span class="text-white">Clientes</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_user">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="pedido.id_user" disabled >
           <option *ngFor="let user of Usuarios" [value]="user.id_user">{{ user.nombre }}</option>
         </select>
       </label>
 
       <label class="block">
         <span class="text-white">Lote</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_lote">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="pedido.id_lote" disabled>
           <option *ngFor="let lote of Lotes" [value]="lote.id_lote">{{ lote.id_lote }}</option>
         </select>
       </label>
@@ -45,7 +45,7 @@
 
     <label class="block w-full col-span-2 mt-4">
       <span class="text-white">Comentario</span>
-      <textarea class="w-full px-3  py-2 h-[150px] rounded bg-gray-800 text-white" [(ngModel)]="nuevopedido.comentario"></textarea>
+      <textarea class="w-full px-3  py-2 h-[150px] rounded bg-gray-800 text-white" [(ngModel)]="pedido.comentario"></textarea>
     </label>
 
     <div class="flex justify-center mt-4 space-x-4">

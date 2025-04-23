@@ -34,6 +34,7 @@ export class CrearLoteComponent {
   };
 
   submit() {
+    console.log(this.nuevoLote);
     this.nuevoLote.peso = Number(this.nuevoLote.peso);
     this.loteService.createLote(this.nuevoLote).subscribe({
       next: (response) => {

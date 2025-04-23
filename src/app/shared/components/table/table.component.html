@@ -5,23 +5,31 @@
         <th *ngFor="let column of columns" class="p-3 text-left border-b border-gray-600">
           {{ column }}
         </th>
+        <th *ngIf="mostrarCompletar"  class="p-3 text-left border-b border-gray-600">Completar</th>
         <th class="p-3 text-left border-b border-gray-600">Editar</th>
-        <th class="p-3 text-left border-b border-gray-600">Eliminar</th>
+        <th *ngIf="mostrarEliminar"  class="p-3 text-left border-b border-gray-600">Eliminar</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let row of data" class="border-b text-white border-gray-600 hover:bg-gray-700">
         <td *ngFor="let column of columns" class="p-3">{{ row[column] || 'N/A' }}</td>
+        <td *ngIf="mostrarCompletar" class="p-3">
+          <button
+            class="bg-orange-400 hover:bg-orange-500 text-white px-3 py-1 rounded"
+            (click)="onComplete(row)">
+            Completar
+          </button>
+        </td>
         <td class="p-3">
-          <button 
-            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" 
+          <button
+            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
             (click)="onEdit(row)">
             Editar
           </button>
         </td>
-        <td class="p-3">
-          <button 
-            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" 
+        <td *ngIf="mostrarEliminar"  class="p-3">
+          <button
+            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
             (click)="onDelete(row)">
             Eliminar
           </button>
