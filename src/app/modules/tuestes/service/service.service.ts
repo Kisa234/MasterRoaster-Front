@@ -38,4 +38,8 @@ export class TuesteService {
     // return this.http.get<Tueste[]>(`${this.baseUrl}`);
     return this.http.get<any[]>(`${this.baseUrlP}`);
   }
+
+  completarTostado(id:string): Observable<any[]> {
+    return this.http.put<any[]>(`${this.baseUrl}/c/${id}`, {});
+  }
 }

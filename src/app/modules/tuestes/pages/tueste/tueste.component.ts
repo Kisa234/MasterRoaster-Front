@@ -19,7 +19,6 @@ export class TuesteComponent {
 
   constructor(
     private tuesteService: TuesteService,
-    private pedidoService: PedidoService,
   ){}
 
   ngOnInit() {
@@ -42,6 +41,7 @@ export class TuesteComponent {
   ];
 
   rows: {
+    'id' : string,
     'Id Lote' : string,
     'Fecha Tueste' : string,
     'Peso (Kg)' : string,
@@ -49,22 +49,11 @@ export class TuesteComponent {
   }[] = [];
 
 
-
-  html: string =
-    `
-    <button
-            class="bg-orange-400 hover:bg-orange-500 text-white px-3 py-1 rounded"
-            (click)="onDelete(row)">
-            Eliminar
-    </button>
-    `
-    ;
-
-
   getTuestes(){
     this.tuesteService.getAllTuestes().subscribe({
       next: (response) => {
         this.rows = response.map((tueste) => ({
+          id: tueste.id_tueste,
           'Id Lote': tueste.id_lote,
           'Fecha Tueste': tueste.fecha_tueste,
           'Peso (Kg)': tueste.peso,
@@ -83,8 +72,15 @@ export class TuesteComponent {
     this.mostrarModalLote = true;
   }
 
-  deleteRow(row: any) {
+  completeRow(row: any) {
+    this.tuesteService.completarTostado(row.id).subscribe({
+      next: (response) => {
+        this.getTuestes();
+      },
+      error: (error) => {
 
+      }
+    });
   }
 
   abrirModal() {
