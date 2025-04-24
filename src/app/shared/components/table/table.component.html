@@ -6,7 +6,7 @@
           {{ column }}
         </th>
         <th *ngIf="mostrarCompletar"  class="p-3 text-left border-b border-gray-600">Completar</th>
-        <th class="p-3 text-left border-b border-gray-600">Editar</th>
+        <th *ngIf="mostrarEditar" class="p-3 text-left border-b border-gray-600">Editar</th>
         <th *ngIf="mostrarEliminar"  class="p-3 text-left border-b border-gray-600">Eliminar</th>
       </tr>
     </thead>
@@ -20,7 +20,7 @@
             Completar
           </button>
         </td>
-        <td class="p-3">
+        <td *ngIf="mostrarEditar" class="p-3">
           <button
             class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
             (click)="onEdit(row)">

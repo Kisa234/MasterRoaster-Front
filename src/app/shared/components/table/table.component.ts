@@ -16,4 +16,5 @@ export class TableComponent {
   @Input() onComplete!: (row: any) => void;
   @Input() mostrarCompletar = false;
   @Input() mostrarEliminar = true;
+  @Input() mostrarEditar = true;
 }
