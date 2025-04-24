@@ -105,7 +105,6 @@ export class EditarPedidoComponent implements OnInit {
     this.update.id_pedido = this.pedido.id_pedido;
     this.update.cantidad = this.pedido.cantidad;
     this.update.comentario = this.pedido.comentario;
-    console.log(this.update)
 
     this.pedidoService.updatePedido(this.id_pedido,this.update).subscribe({
       next:(res)=>{
