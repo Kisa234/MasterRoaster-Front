@@ -45,7 +45,7 @@ export class MuestraComponent implements OnInit{
     region: string;
     departamento: string;
     'peso (Gr)': number;
-    variedades: string;
+    variedades: string[];
   }[] = [];
 
   getMuestras() {

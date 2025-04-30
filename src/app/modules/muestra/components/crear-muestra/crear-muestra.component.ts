@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Lote } from '../../../../interfaces/lote.interface';
 import { Muestra } from '../../../../interfaces/muestra.interface';
 import { MuestraService } from '../../service/muestra.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-crearmuestra',
-  imports: [FormsModule,NgFor],
+  imports: [FormsModule,NgFor,NgSelectModule],
   templateUrl: './crear-muestra.component.html',
   styles:""
 })
@@ -27,13 +28,21 @@ export class CrearmuestraComponent {
     'Experimental',
   ]
 
+  variedadesArabica: string[] = [
+    'Typica', 'Bourbon', 'Caturra', 'Catuai', 'Pacamara',
+    'SL28', 'SL34', 'Geisha', 'Mundo Novo', 'Maragogipe',
+    'Villalobos', 'Pacas', 'Ruiru 11', 'Catimor', 'Villa Sarchi'
+  ];
+
+  
+
   nuevaMuestra: Muestra = {
     productor: '',
     finca: '',
     region: '',
     departamento: '',
     peso: 0,
-    variedades: '',
+    variedades: [],
     proceso: '',
   };
 

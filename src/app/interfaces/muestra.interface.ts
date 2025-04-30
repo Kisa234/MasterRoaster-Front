@@ -8,7 +8,7 @@ export interface Muestra {
   region: string,
   departamento: string,
   peso: number,
-  variedades: string,
+  variedades: string[],
   proceso: string,
   fecha_registro?: Date, 
   eliminado?: boolean,

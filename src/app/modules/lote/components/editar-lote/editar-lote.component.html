@@ -36,9 +36,27 @@
         <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoLote.peso" />
       </label>
 
-      <label class="block">
-        <span class="text-white">Variedades</span>
-        <input type="text" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoLote.variedades" />
+      <label class="block col-span-2">
+        <span class="text-white block ">Variedades</span>
+      
+        <ng-select
+          [items]="variedadesArabica"
+          [multiple]="true"
+          [(ngModel)]="nuevoLote.variedades"
+          placeholder="Selecciona una o más variedades"
+          [searchable]="true"
+          [closeOnSelect]="false"
+          [clearable]="false"
+          dropdownPosition="auto"
+          class="w-full h-[2.5rem] text-sm text-white border border-none rounded bg-gray-800 px-3 
+                 ng-select-blue-chips ng-select-dark-panel"
+        >
+          <ng-template ng-option-tmp let-item="item">
+            <div class="px-3 py-2 text-white hover:bg-gray-700 bg-gray-800">
+              {{ item }}
+            </div>
+          </ng-template>
+        </ng-select>
       </label>
 
       <label class="block">
@@ -47,8 +65,13 @@
           <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
         </select>
       </label>
-
-
+      
+      <label class="block">
+        <span class="text-white">Clientes</span>
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoLote.id_user" disabled >
+          <option *ngFor="let user of Usuarios" [value]="user.id_user">{{ user.nombre }}</option>
+        </select>
+      </label>
     </div>
 
 

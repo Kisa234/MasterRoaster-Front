@@ -2,3 +2,38 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ng-select-blue-chips .ng-select-container {
+    min-height: 2.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .ng-select-blue-chips .ng-value {
+    background-color: #2563eb !important; /* bg-blue-600 */
+    color: white !important;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    margin-right: 4px;
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .ng-select-blue-chips .ng-value-icon {
+    margin-left: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .ng-select-dark-panel .ng-dropdown-panel {
+    background-color: #1f2937 !important; /* bg-gray-800 */
+    color: white;
+    border: 1px solid #374151 !important; /* border-gray-700 */
+  }
+  
+  

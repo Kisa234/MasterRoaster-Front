@@ -47,7 +47,7 @@ export class LoteComponent implements OnInit {
     region: string;
     departamento: string;
     'peso (Kg)': number;
-    variedades: string;
+    variedades: string[];
   }[] = [];
 
 

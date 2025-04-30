@@ -25,7 +25,7 @@ export class EditarPedidoComponent implements OnInit {
 
   constructor(
     private readonly pedidoService: PedidoService,
-    private readonly AuthService: AuthService,
+    private readonly authService: AuthService,
     private readonly LoteService: LoteService,
   ) {}
 
@@ -81,7 +81,7 @@ export class EditarPedidoComponent implements OnInit {
   }
 
   private cargarDatos() {
-    this.AuthService.getUsers().subscribe({
+    this.authService.getUsers().subscribe({
       next:(res)=>{
         this.Usuarios = res.map((user:any) => ({
           id_user: user.id_user,

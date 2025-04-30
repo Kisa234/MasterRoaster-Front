@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MuestraService } from '../../service/muestra.service';
 import { Muestra } from '../../../../interfaces/muestra.interface';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-editar-muestra',
-  imports: [ FormsModule , NgFor],
+  imports: [ FormsModule , NgFor,NgSelectModule],
   templateUrl: './editar-muestra.component.html',
   styles: ``
 })
@@ -44,9 +45,17 @@ export class EditarMuestraComponent implements OnInit {
     region: '',
     departamento: '',
     peso: 0,
-    variedades: '',
+    variedades: [],
     proceso: '',
   };
+
+  variedadesArabica: string[] = [
+    'Typica', 'Bourbon', 'Caturra', 'Catuai', 'Pacamara',
+    'SL28', 'SL34', 'Geisha', 'Mundo Novo', 'Maragogipe',
+    'Villalobos', 'Pacas', 'Ruiru 11', 'Catimor', 'Villa Sarchi'
+  ];
+
+  
 
   
   submit() {

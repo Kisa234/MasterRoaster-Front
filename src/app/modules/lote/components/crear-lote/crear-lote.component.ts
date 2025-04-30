@@ -1,17 +1,25 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoteService } from '../../service/lote.service';
 import { Lote } from '../../../../interfaces/lote.interface';
 import { NgFor } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-crear-lote',
-  imports: [FormsModule,NgFor],
+  imports: [FormsModule,NgFor,NgSelectModule],
   templateUrl: './crear-lote.component.html',
 })
-export class CrearLoteComponent {
+export class CrearLoteComponent implements OnInit {
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
 
-  constructor(private readonly loteService: LoteService) {}
+  constructor(
+    private readonly loteService: LoteService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onCreate = new EventEmitter<any>();
@@ -23,15 +31,39 @@ export class CrearLoteComponent {
     'Experimental',
   ]
 
+  Usuarios: {
+    id_user: string;
+    nombre: string;
+  }[] = [];
+
   nuevoLote: Lote = {
+    id_user: '',
     productor: '',
     finca: '',
     region: '',
     departamento: '',
     peso: 0,
-    variedades: '',
+    variedades: [],
     proceso: '',
   };
+
+  variedadesArabica: string[] = [
+    'Typica', 'Bourbon', 'Caturra', 'Catuai', 'Pacamara',
+    'SL28', 'SL34', 'Geisha', 'Mundo Novo', 'Maragogipe',
+    'Villalobos', 'Pacas', 'Ruiru 11', 'Catimor', 'Villa Sarchi'
+  ];
+
+  private cargarDatos() {
+    this.authService.getUsers().subscribe({
+      next:(res)=>{
+        this.Usuarios = res.map((user:any) => ({
+          id_user: user.id_user,
+          nombre: user.name,
+        }));
+      }
+    });
+  }
+
 
   submit() {
     console.log(this.nuevoLote);

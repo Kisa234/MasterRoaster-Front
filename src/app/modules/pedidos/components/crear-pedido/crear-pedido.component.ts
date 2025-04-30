@@ -5,6 +5,7 @@ import { PedidoService } from '../../service/pedido.service';
 import { LoteService } from '../../../lote/service/lote.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { NgFor } from '@angular/common';
+import { Lote } from '../../../../interfaces/lote.interface';
 
 
 
@@ -31,6 +32,7 @@ export class CrearPedidoComponent implements OnInit {
   Usuarios: {
     id_user: string;
     nombre: string;
+    rol: string; 
   }[] = [];
 
   Lotes: {
@@ -68,22 +70,29 @@ export class CrearPedidoComponent implements OnInit {
   // Cargar los usuarios y lotes al iniciar el componente
   cargarDatos() {
     this.AuthService.getUsers().subscribe({
-      next:(res)=>{
-        this.Usuarios = res.map((user:any) => ({
+      next: (usuarios) => {
+        this.Usuarios = usuarios.map((user: any) => ({
           id_user: user.id_user,
           nombre: user.name,
+          rol: user.rol 
         }));
-      }
-    });
 
-    this.LoteService.getLotes().subscribe({
-      next:(res)=>{
-        this.Lotes = res.map((lote:any) => ({
-          id_lote: lote.id_lote,
-        }));
+        console.log(this.Usuarios);
+  
+        this.LoteService.getLotes().subscribe({
+          next: (lotes: Lote[]) => {
+            this.Lotes = lotes
+              .filter((lote: Lote) => !lote.id_user && !!lote.id_lote) // aseguramos que tenga id_lote
+              .map((lote: Lote) => ({
+                id_lote: lote.id_lote as string, // forzamos que no sea undefined
+              }));
+          }
+        });
+        
       }
     });
   }
+  
 
   cerrar() {
     this.onCerrar.emit();

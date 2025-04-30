@@ -6,10 +6,10 @@ export interface Lote {
   region: string,
   departamento: string,
   peso: number,
-  variedades: string,
+  variedades: string[],
   proceso: string,
   fecha_registro?: Date, 
   eliminado?: boolean,
-  user_id?: string,
-  analisis_id?: string,
+  id_user?: string,
+  id_analisis?: string,
 }
