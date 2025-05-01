@@ -24,7 +24,14 @@ export class EditarLoteComponent implements OnInit {
      if (this.id) {
       this.loteService.getLoteById(this.id).subscribe({
         next: (response) => {
-          this.nuevoLote = response;
+          this.nuevoLote.id_user = response.id_user;
+          this.nuevoLote.productor = response.productor;
+          this.nuevoLote.finca = response.finca;
+          this.nuevoLote.region = response.region;
+          this.nuevoLote.departamento = response.departamento;
+          this.nuevoLote.peso = response.peso;
+          this.nuevoLote.variedades = response.variedades;
+          this.nuevoLote.proceso = response.proceso;
         },
         error: (error) => console.error('Error al obtener el lote:', error)
       });
@@ -54,11 +61,13 @@ export class EditarLoteComponent implements OnInit {
     proceso: '',
   };
 
+
+
   Usuarios: {
     id_user: string;
     nombre: string;
   }[] = [];
-  
+
   variedadesArabica: string[] = [
     'Typica', 'Bourbon', 'Caturra', 'Catuai', 'Pacamara',
     'SL28', 'SL34', 'Geisha', 'Mundo Novo', 'Maragogipe',
@@ -78,7 +87,8 @@ export class EditarLoteComponent implements OnInit {
 
 
   submit() {
-    this.loteService.updateLote(this.id, this.nuevoLote).subscribe({
+    console.log(this.nuevoLote);
+    this.loteService.updateLote(this.id, {...this.nuevoLote, id_user: ''}).subscribe({
       next: (response) => {
         this.onCreate.emit();
         this.cerrar();
