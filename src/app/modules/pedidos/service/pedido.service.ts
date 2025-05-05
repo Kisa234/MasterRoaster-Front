@@ -44,4 +44,7 @@ export class PedidoService {
   getAllPedidos(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.baseUrl}`);
   }
+  getPedidosOrdenTueste(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.baseUrl}/orden/tueste`);
+  }
 }

@@ -16,22 +16,59 @@
 
     <button
       class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
-      (click)="abrirModal()">
+      (click)="abrirModalCreateOrder()">
       Generar Orden de Tueste
     </button>
 
   </div>
 
-  <!-- Tabla reutilizable -->
+  <!-- Tabla Pedidos -->
   <app-table
-    [columns]="columns"
-    [data]="rows"
+    [columns]="columnsPedido"
+    [data]="rowsPedido"
     [onEdit]="editRow.bind(this)"
-    [onComplete]="completeRow.bind(this)"
     [mostrarCompletar]="true"
+    [mostrarEditar]="true"
+    [mostrarEliminar]="true"
+    >
+  </app-table>
+
+  <div class="m-10">
+
+  </div>
+  
+
+  <!-- Tabla Tuestes-->
+  <app-table
+    [columns]="columnsTueste"
+    [data]="rowsTueste"
+    [onEdit]="editRow.bind(this)"
+    [onComplete]="completeRowTueste.bind(this)"
+    [mostrarCompletar]="true"
+    [mostrarEditar]="true"
     [mostrarEliminar]="false"
     >
   </app-table>
+
+  <!-- Modal para generar orden de tueste -->
+   <app-create-orden
+    *ngIf="ComponentCreateOrder"
+    (onCerrar)="cerrarModal()"
+    (onOrdenCreada)="actualizarPedidos()"
+    >
+    
+   </app-create-orden>
+
+   <app-edit-orden
+    *ngIf="ComponentEditOrder"
+    [id]="pedidoIdActual"
+    (onCerrar)="cerrarModal()"
+    (onOrdenEditada)="actualizarPedidos()"
+    >
+  </app-edit-orden>
+  <!-- Modal para editar orden de tueste -->
+  <!-- Modal editar tueste -->
+  <!-- Modal complete tueste -->
 
 
 </div>
