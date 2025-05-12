@@ -26,10 +26,10 @@
   <app-table
     [columns]="columnsPedido"
     [data]="rowsPedido"
-    [onEdit]="editRow.bind(this)"
-    [mostrarCompletar]="true"
     [mostrarEditar]="true"
     [mostrarEliminar]="true"
+    [onDelete]="deleteOrden.bind(this)"
+    [onEdit]="editOrder.bind(this)"
     >
   </app-table>
 
@@ -42,8 +42,8 @@
   <app-table
     [columns]="columnsTueste"
     [data]="rowsTueste"
-    [onEdit]="editRow.bind(this)"
-    [onComplete]="completeRowTueste.bind(this)"
+    [onEdit]="editTueste.bind(this)"
+    [onComplete]="completeTueste.bind(this)"
     [mostrarCompletar]="true"
     [mostrarEditar]="true"
     [mostrarEliminar]="false"

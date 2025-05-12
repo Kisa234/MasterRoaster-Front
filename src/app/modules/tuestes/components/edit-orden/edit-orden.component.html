@@ -18,14 +18,15 @@
           <select 
               class=" rounded px-3 py-2 w-full bg-gray-800 text-white" 
               [(ngModel)]="nuevopedido.id_user"
-              (change)="cargarLotes()">
+              (change)="cargarLotes()"
+              disabled>
             <option *ngFor="let user of Usuarios" [value]="user.id_user">{{ user.nombre }}</option>
           </select>
         </label>
 
         <label class="block">
           <span class="text-white">Lote</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_lote">
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_lote" disabled>
             <option *ngFor="let lote of Lotes" [value]="lote.id_lote">{{ lote.id_lote }}</option>
           </select>
         </label>

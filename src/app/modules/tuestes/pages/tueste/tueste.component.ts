@@ -39,6 +39,7 @@ export class TuesteComponent {
   ComponentEditOrder: boolean = false;
   
   columnsPedido = [
+    'Id',
     'lote',
     'tipo pedido',
     'cantidad (KG)',
@@ -47,6 +48,7 @@ export class TuesteComponent {
 
   rowsPedido: {
     id: string;
+    'Id': string
     lote: string;
     'tipo pedido': string;
     'cantidad (KG)': number;
@@ -54,6 +56,7 @@ export class TuesteComponent {
   }[] = [];
 
   columnsTueste = [
+    'Id_Pedido',
     'Id Lote',
     'Fecha Tueste',
     'Peso (Kg)',
@@ -62,6 +65,7 @@ export class TuesteComponent {
 
   rowsTueste: {
     'id' : string,
+    'Id_Pedido' : string,
     'Id Lote' : string,
     'Fecha Tueste' : string,
     'Peso (Kg)' : string,
@@ -74,6 +78,7 @@ export class TuesteComponent {
         console.log(response);
         this.rowsPedido = response.map((pedido) => ({
           id: pedido.id_pedido!,
+          'Id': pedido.id_pedido!.substring(0, 6),
           lote: pedido.id_lote!,
           'tipo pedido': pedido.tipo_pedido!,
           'cantidad (KG)': pedido.cantidad!,
@@ -87,13 +92,13 @@ export class TuesteComponent {
   }
 
 
-
   getTuestes(){
     this.tuesteService.getAllTuestes().subscribe({
       next: (response) => {
         this.rowsTueste = response.map((tueste) => ({
           id: tueste.id_tueste,
           'Id Lote': tueste.id_lote,
+          'Id_Pedido': tueste.id_pedido.substring(0, 6),
           'Fecha Tueste': tueste.fecha_tueste,
           'Peso (Kg)': tueste.peso,
           'Observaciones': tueste.observaciones,
@@ -106,19 +111,47 @@ export class TuesteComponent {
     });
   }
 
-  editRow(row: any) {
+  editOrder(row: any) {
     this.pedidoIdActual = row.id;
     this.ComponentEditOrder = true;
     
   }
 
-  completeRowTueste(row: any) {
+  completeTueste(row: any) {
     this.tuesteService.completarTostado(row.id).subscribe({
       next: (response) => {
         this.getTuestes();
       },
       error: (error) => {
 
+      }
+    });
+  }
+
+  editTueste(row: any) {
+    this.ComponentEditTueste = true;
+  }
+
+
+  deleteOrden(row:any){
+    this.pedidoService.deletePedido(row.id).subscribe({
+      next: (response) => {
+        this.actualizarPedidos();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  completeOrder(row: any) {
+    this.pedidoIdActual = row.id;
+    this.pedidoService.completarPedido(row.id).subscribe({
+      next: (response) => {
+        this.getPedidos();
+      },
+      error: (error) => {
+        console.error(error);
       }
     });
   }

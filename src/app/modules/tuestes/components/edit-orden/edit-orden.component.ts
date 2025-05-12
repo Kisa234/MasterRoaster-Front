@@ -34,7 +34,6 @@ export class EditOrdenComponent {
       this.cargarUsuarios();
       this.cargarLotes();
       this.cargarOrden();
-
   }
   
   @Input() id: string = '';
@@ -79,11 +78,7 @@ export class EditOrdenComponent {
   };
   
   data: TuesteRow[] = [
-    {
-      '# Batch': 1,
-      'Peso Verde': 0,
-      'Peso Tostado': 0,
-    },
+      
   ];
   
   columns: (keyof TuesteRow)[] = [
@@ -94,13 +89,13 @@ export class EditOrdenComponent {
   
   cantidadTostada(): number {
     return this.nuevopedido?.cantidad 
-      ? parseFloat((this.nuevopedido.cantidad * 1.15).toFixed(2)) 
+      ? parseFloat((this.nuevopedido.cantidad * 0.85).toFixed(2)) 
       : 0;
   }
   
   actualizarPesoTostado(index: number): void {
     const verde = this.data[index]['Peso Verde'];
-    this.data[index]['Peso Tostado'] = parseFloat((verde * 1.15).toFixed(2));
+    this.data[index]['Peso Tostado'] = parseFloat((verde * 0.85).toFixed(2));
   }
   
   get totalPesoVerde(): number {
@@ -165,10 +160,10 @@ export class EditOrdenComponent {
         this.nuevopedido.pesos!.push(pesoVerde);
       }
     }
-  
+
     console.log(this.nuevopedido);
   
-    this.pedidoService.createPedido(this.nuevopedido).subscribe({
+    this.pedidoService.updatePedido(this.id,this.nuevopedido).subscribe({
       next:(res)=>{
         this.onAnalisisCreado.emit();
         this.cerrar();
@@ -188,12 +183,9 @@ export class EditOrdenComponent {
           nombre: user.name,
           rol: user.rol 
         }));
-      
-        console.log(this.Usuarios);
       }
     });
   }
-  
   
   // Cargar los lotes
   cargarLotes() {
@@ -211,27 +203,25 @@ export class EditOrdenComponent {
   cargarOrden(){
     this.pedidoService.getPedidoById(this.id).subscribe({
       next: (pedido) => {
-        console.log(pedido);
-        this.nuevopedido = {
-
-          cantidad: pedido.cantidad,
-          comentario: pedido.comentario,
-          id_user: pedido.id_user,
-          id_lote: pedido.id_lote,
-          pesos:   pedido.pesos,
-          tostadora: pedido.tostadora,
-          fecha_tueste: pedido.fecha_tueste,
-
-        }
-        this.nuevopedido.cantidad = this.totalPesoVerde;
+        this.nuevopedido = pedido;
+        const fechaTueste = new Date(pedido.fecha_tueste!);
+        this.nuevopedido.fecha_tueste = `${fechaTueste.getFullYear()}-${(fechaTueste.getMonth() + 1).toString().padStart(2, '0')}-${fechaTueste.getDate().toString().padStart(2, '0')}`;
+        this.cargarTuestes()
       },
+      
       error: (error) => {
         console.error(error);
       }
     });
   }
 
-
+  cargarTuestes(){
+    this.data = this.nuevopedido.pesos!.map((peso, index) => ({
+      '# Batch': index + 1,
+      'Peso Verde': peso,
+      'Peso Tostado': parseFloat((peso * 0.85).toFixed(2))
+    }));
+  }
 
   cerrar() {
     this.onCerrar.emit();

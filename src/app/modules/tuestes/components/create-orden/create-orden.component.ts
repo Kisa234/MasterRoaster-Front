@@ -96,13 +96,13 @@ export class CreateOrdenComponent implements OnInit {
   
   cantidadTostada(): number {
     return this.nuevopedido?.cantidad 
-      ? parseFloat((this.nuevopedido.cantidad * 1.15).toFixed(2)) 
+      ? parseFloat((this.nuevopedido.cantidad * 0.85).toFixed(2)) 
       : 0;
   }
   
   actualizarPesoTostado(index: number): void {
     const verde = this.data[index]['Peso Verde'];
-    this.data[index]['Peso Tostado'] = parseFloat((verde * 1.15).toFixed(2));
+    this.data[index]['Peso Tostado'] = parseFloat((verde * 0.85).toFixed(2));
   }
 
   get totalPesoVerde(): number {

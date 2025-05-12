@@ -1,1 +1,96 @@
-<p>edit-tueste works!</p>
+
+
+
+<div class="fixed inset-0   bg-opacity-50 backdrop-blur-md  flex justify-center items-center  z-50"
+  (click)="cerrar()">
+
+    <div class="bg-gray-900  rounded-lg shadow-lg p-6 w-full max-w-5xl relative" (click)="$event.stopPropagation()">
+
+
+
+        <h2 class="text-xl font-bold text-white text-center mb-4">Editar Muestra</h2>
+
+        <!-- Botón de cerrar -->
+        <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
+
+    
+        <label class="block">
+          <span class="text-white">Densidad</span>
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.peso_entrada">
+            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-white">Temperatura de Entrada</span>
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.temperatura_entrada">
+            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-white">LLama Inicial</span>
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.llama_inicial">
+            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-white">Aire Inicial</span>
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.aire_inicial">
+            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-white">Punto de no Retorno</span>
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.punto_no_retorno">
+            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+          </select>
+        </label>
+        <label class="block">
+            <span class="text-white">Tiempo despues del crack</span>
+            <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.tiempo_despues_crack">
+              <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+            </select>
+        </label>
+        <label class="block">
+            <span class="text-white">Temperatura de crack</span>
+            <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.temperatura_crack">
+              <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+            </select>
+        </label>
+        <label class="block">
+            <span class="text-white">Temperatura Salida</span>
+            <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.temperatura_salida">
+              <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+            </select>
+        </label>
+        <label class="block">
+            <span class="text-white">Tiempo Total</span>
+            <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.tiempo_total">
+              <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+            </select>
+        </label>
+        <label class="block">
+            <span class="text-white">Grados de desarrollo</span>
+            <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.grados_desarrollo">
+              <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
+            </select>
+        </label>
+        
+
+    </div>
+
+
+    <div class="flex justify-center mt-6 space-x-4">
+      <button type="button" class="bg-gray-600 px-4 py-2 rounded text-white hover:bg-gray-500 transition"
+        (click)="cerrar()">
+        Cancelar
+      </button>
+      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition"
+        (click)="submit()">
+        Guardar
+      </button>
+    </div>
+
+  
+</div>
