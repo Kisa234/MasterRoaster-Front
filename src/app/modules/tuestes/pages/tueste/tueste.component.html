@@ -56,9 +56,9 @@
     (onCerrar)="cerrarModal()"
     (onOrdenCreada)="actualizarPedidos()"
     >
-    
    </app-create-orden>
 
+   <!-- Modal para editar orden de tueste -->
    <app-edit-orden
     *ngIf="ComponentEditOrder"
     [id]="pedidoIdActual"
@@ -66,9 +66,18 @@
     (onOrdenEditada)="actualizarPedidos()"
     >
   </app-edit-orden>
-  <!-- Modal para editar orden de tueste -->
-  <!-- Modal editar tueste -->
-  <!-- Modal complete tueste -->
 
+  <!-- Modal editar tueste -->
+  <app-edit-tueste
+    *ngIf="ComponentEditTueste"
+    [id]="tuesteIdActual"
+    (onCerrar)="cerrarModal()"
+    ></app-edit-tueste>
+  <!-- Modal complete tueste -->
+  <app-complete-tueste
+    *ngIf="ComponentCompleteTueste"
+    [id]="tuesteIdActual"
+    (onCerrar)="cerrarModal()"
+        ></app-complete-tueste>
 
 </div>

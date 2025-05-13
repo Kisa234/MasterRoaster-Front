@@ -8,10 +8,12 @@ import { PedidoService } from '../../../pedidos/service/pedido.service';
 import { CreateOrdenComponent } from "../../components/create-orden/create-orden.component";
 import { NgIf } from '@angular/common';
 import { EditOrdenComponent } from "../../components/edit-orden/edit-orden.component";
+import { EditTuesteComponent } from '../../components/edit-tueste/edit-tueste.component';
+import { CompleteTuesteComponent } from '../../components/complete-tueste/complete-tueste.component';
 
 @Component({
   selector: 'app-tueste',
-  imports: [FormsModule, RouterModule, TableComponent, CreateOrdenComponent, NgIf, EditOrdenComponent],
+  imports: [FormsModule, RouterModule, TableComponent, CreateOrdenComponent, NgIf, EditOrdenComponent,EditTuesteComponent, CompleteTuesteComponent],
   templateUrl: './tueste.component.html',
   styles: ``
 })
@@ -33,6 +35,7 @@ export class TuesteComponent {
   today = Date.now();
   filtro: string = '';
   pedidoIdActual: string = '';
+  tuesteIdActual: string = '';
   ComponentCompleteTueste: boolean = false;
   ComponentEditTueste: boolean = false;
   ComponentCreateOrder: boolean = false;
@@ -42,7 +45,7 @@ export class TuesteComponent {
     'Id',
     'lote',
     'tipo pedido',
-    'cantidad (KG)',
+    'cantidad (Gr)',
     'estado',
   ];
 
@@ -51,7 +54,7 @@ export class TuesteComponent {
     'Id': string
     lote: string;
     'tipo pedido': string;
-    'cantidad (KG)': number;
+    'cantidad (Gr)': number;
     estado: string;
   }[] = [];
 
@@ -59,7 +62,7 @@ export class TuesteComponent {
     'Id_Pedido',
     'Id Lote',
     'Fecha Tueste',
-    'Peso (Kg)',
+    'Peso (Gr)',
     'Observaciones',
   ];
 
@@ -68,7 +71,7 @@ export class TuesteComponent {
     'Id_Pedido' : string,
     'Id Lote' : string,
     'Fecha Tueste' : string,
-    'Peso (Kg)' : string,
+    'Peso (Gr)' : string,
     'Observaciones' : string,
   }[] = [];
 
@@ -81,7 +84,7 @@ export class TuesteComponent {
           'Id': pedido.id_pedido!.substring(0, 6),
           lote: pedido.id_lote!,
           'tipo pedido': pedido.tipo_pedido!,
-          'cantidad (KG)': pedido.cantidad!,
+          'cantidad (Gr)': pedido.cantidad!,
           estado: pedido.estado_pedido!,
         }));
       },
@@ -91,7 +94,6 @@ export class TuesteComponent {
     });
   }
 
-
   getTuestes(){
     this.tuesteService.getAllTuestes().subscribe({
       next: (response) => {
@@ -100,7 +102,7 @@ export class TuesteComponent {
           'Id Lote': tueste.id_lote,
           'Id_Pedido': tueste.id_pedido.substring(0, 6),
           'Fecha Tueste': tueste.fecha_tueste,
-          'Peso (Kg)': tueste.peso,
+          'Peso (Gr)': tueste.peso,
           'Observaciones': tueste.observaciones,
 
         }));
@@ -118,18 +120,13 @@ export class TuesteComponent {
   }
 
   completeTueste(row: any) {
-    this.tuesteService.completarTostado(row.id).subscribe({
-      next: (response) => {
-        this.getTuestes();
-      },
-      error: (error) => {
-
-      }
-    });
+    this.tuesteIdActual = row.id;
+    this.ComponentCompleteTueste = true;
   }
 
   editTueste(row: any) {
     this.ComponentEditTueste = true;
+    this.tuesteIdActual = row.id;
   }
 
 

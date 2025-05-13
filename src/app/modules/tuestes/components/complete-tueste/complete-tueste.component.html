@@ -1,62 +1,80 @@
+<div
+  class="fixed inset-0 bg-opacity-50 backdrop-blur-md flex justify-center items-center z-50"
+  (click)="cerrar()"
+>
+  <div
+    class="bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-5xl relative"
+    (click)="$event.stopPropagation()"
+  >
+    <h2 class="text-xl font-bold text-white text-center mb-4">
+      Completar Tueste
+    </h2>
 
+    <!-- Botón de cerrar -->
+    <button
+      class="absolute top-3 right-4 text-white text-lg"
+      (click)="cerrar()"
+    >
+      &times;
+    </button>
 
+    <div class="grid grid-cols-3 gap-4">
+      <label class="block">
+        <span class="text-white">Peso de Salida</span>
+        <input
+          type="number"
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white"
+          [(ngModel)]="tueste.peso_salida"
+          (change)="calcularMerma()"
+        />
+      </label>
 
-<div class="fixed inset-0   bg-opacity-50 backdrop-blur-md  flex justify-center items-center  z-50"
-  (click)="cerrar()">
+      <label class="block">
+        <span class="text-white">Merma</span>
+        <input
+          type="number"
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white"
+          [(ngModel)]="tueste.merma"
+          readonly
+        />
+      </label>
 
-    <div class="bg-gray-900  rounded-lg shadow-lg p-6 w-full max-w-5xl relative" (click)="$event.stopPropagation()">
-
-
-
-        <h2 class="text-xl font-bold text-white text-center mb-4">Editar Muestra</h2>
-
-        <!-- Botón de cerrar -->
-        <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
-
-    
-        <label class="block">
-          <span class="text-white">Peso de Salida</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.peso_entrada">
-            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
-          </select>
+      <label class="block">
+        <span class="text-white">Agtrom Comercial</span>
+        <input
+          type="number"
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white"
+          [(ngModel)]="tueste.agtrom_comercial"
+          (change)="calcularAgtrom()"
+          />
         </label>
-
-        <label class="block">
-          <span class="text-white">Merma</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.temperatura_entrada">
-            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
-          </select>
-        </label>
-
-        <label class="block">
-          <span class="text-white">Agtrom Comercial</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.llama_inicial">
-            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
-          </select>
-        </label>
-
+        
         <label class="block">
           <span class="text-white">Agtrom Gourmet</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="tueste.aire_inicial">
-            <option *ngFor="let proceso of procesos" [value]="proceso">{{ proceso }}</option>
-          </select>
-        </label>
-
-        
-
+          <input
+          type="number"
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white"
+          [(ngModel)]="tueste.agtrom_gourmet"
+          readonly
+        />
+      </label>
     </div>
-
 
     <div class="flex justify-center mt-6 space-x-4">
-      <button type="button" class="bg-gray-600 px-4 py-2 rounded text-white hover:bg-gray-500 transition"
-        (click)="cerrar()">
+      <button
+        type="button"
+        class="bg-gray-600 px-4 py-2 rounded text-white hover:bg-gray-500 transition"
+        (click)="cerrar()"
+      >
         Cancelar
       </button>
-      <button type="submit" class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition"
-        (click)="submit()">
-        Guardar
+      <button
+        type="submit"
+        class="bg-[#f4a261] px-4 py-2 rounded text-white hover:bg-[#e76f51] transition"
+        (click)="submit()"
+      >
+        Completar
       </button>
     </div>
-
-  
+  </div>
 </div>

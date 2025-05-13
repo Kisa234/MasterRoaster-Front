@@ -19,37 +19,39 @@ export class EditTuesteComponent implements OnInit {
     this.cargarTueste();
   }
 
-  @Input() id: string = '';
+  @Input()  id: string = '';
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
   tueste:Tueste={
     id_tueste                 :'',
-    fecha_tueste              :new Date(),
-    tostadora                 :'',
-    peso_entrada              :0,
-    temperatura_entrada       :0,
-    llama_inicial             :0,
-    aire_inicial              :0,
-    punto_no_retorno          :0,
-    tiempo_despues_crack      :0,
-    temperatura_crack         :0,
-    temperatura_salida        :0,
-    tiempo_total              :0,
-    porcentaje_caramelizacion :0,
-    desarrollo                :0,
-    grados_desarrollo         :0,
+    densidad                  : 0,
+    humedad                   : 0,
+    peso_entrada              : 0,
+    temperatura_entrada       : 0,
+    llama_inicial             : 0,
+    aire_inicial              : 0,
+    punto_no_retorno          : 0,
+    tiempo_despues_crack      : 0,
+    temperatura_crack         : 0,
+    temperatura_salida        : 0,
+    tiempo_total              : 0,
+    porcentaje_caramelizacion : 0,
+    desarrollo                : 0,
+    grados_desarrollo         : 0,
+    
   }
 
   cargarTueste() {
     const saved = localStorage.getItem(`tueste-edit-${this.id}`);
     if (saved) {
-      this.tueste = JSON.parse(saved);
-    } else {
-      this.tuesteService.getTuesteById(this.id).subscribe((tueste: Tueste) => {
-        this.tueste = tueste;
-      });
-    }
+      this.tueste = {...JSON.parse(saved)};
+    } 
+    
+    this.tuesteService.getTuesteById(this.id).subscribe((tueste: Tueste) => {
+      this.tueste = {...tueste};
+    });
+    
   }
   
 
@@ -67,6 +69,7 @@ export class EditTuesteComponent implements OnInit {
   }
 
   cerrar() {
+    this.actualizarLocalStorage();
     this.onCerrar.emit();
   }
 
