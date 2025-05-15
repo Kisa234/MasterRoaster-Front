@@ -47,6 +47,7 @@ export class EditarPedidoComponent implements OnInit {
     comentario: '',
   }
 
+  cantidadLote: number = 0;
 
 
 
@@ -63,6 +64,16 @@ export class EditarPedidoComponent implements OnInit {
     'Tostado Verde'
   ];
 
+  getCantidadLote() {
+    this.LoteService.getLoteById(this.pedido.id_lote!).subscribe({
+      next: (res) => {
+        this.cantidadLote = res.peso;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
 
   private cargarPedido(): void {
     this.pedidoService.getPedidoById(this.id_pedido).subscribe({

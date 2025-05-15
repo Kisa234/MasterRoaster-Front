@@ -29,14 +29,14 @@ export class LoteTostadoComponent implements OnInit {
   columns = [
     'id',
     'perfil tostado',
-    'peso (KG)',
+    'peso (Gr)',
     'fecha tostado'
   ];
 
   rows: {
     id: string;
     "perfil tostado": string;
-    "peso (KG)" : number;
+    "peso (Gr)" : number;
     "fecha tostado": string;
   }[] = [];
 
@@ -47,7 +47,7 @@ export class LoteTostadoComponent implements OnInit {
         this.rows = response.map((lote) => ({
           id: lote.id_lote_tostado!,
           "perfil tostado": lote.perfil_tostado,
-          "peso (KG)": lote.peso,
+          "peso (Gr)": lote.peso,
           "fecha tostado": new Date(lote.fecha_tostado).toLocaleDateString('es-ES')
         }));
       }

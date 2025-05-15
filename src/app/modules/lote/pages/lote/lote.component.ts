@@ -36,7 +36,7 @@ export class LoteComponent implements OnInit {
     'finca',
     'region',
     'departamento',
-    'peso (Kg)',
+    'peso (Gr)',
     'variedades'
   ];
 
@@ -46,7 +46,7 @@ export class LoteComponent implements OnInit {
     finca: string;
     region: string;
     departamento: string;
-    'peso (Kg)': number;
+    'peso (Gr)': number;
     variedades: string[];
   }[] = [];
 
@@ -60,7 +60,7 @@ export class LoteComponent implements OnInit {
           finca: lote.finca,
           region: lote.region,
           departamento: lote.departamento,
-          'peso (Kg)': lote.peso,
+          'peso (Gr)': lote.peso,
           variedades: lote.variedades,
         }));
       },

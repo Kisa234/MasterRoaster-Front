@@ -44,8 +44,11 @@ export class CrearPedidoComponent implements OnInit {
     'Tostado Verde'
   ];
 
+  cantidadLote: number = 0;
+
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
+
   nuevopedido:Pedido = {
     tipo_pedido: '',
     cantidad: 0,
@@ -55,9 +58,21 @@ export class CrearPedidoComponent implements OnInit {
     id_lote: '',
   };
 
+  getCantidadLote() {
+    this.LoteService.getLoteById(this.nuevopedido.id_lote!).subscribe({
+      next: (res) => {
+        this.cantidadLote = res.peso;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   guardar() {
     this.pedidoService.createPedido(this.nuevopedido).subscribe({
       next:(res)=>{
+        console.log(this.nuevopedido)
         this.onAnalisisCreado.emit();
         this.cerrar();
       },
@@ -77,14 +92,16 @@ export class CrearPedidoComponent implements OnInit {
           rol: user.rol 
         }));
 
-        console.log(this.Usuarios);
+        const adminIds = this.Usuarios
+        .filter(user => user.rol === 'Admin')
+        .map(user => user.id_user);
   
         this.LoteService.getLotes().subscribe({
           next: (lotes: Lote[]) => {
             this.Lotes = lotes
-              .filter((lote: Lote) => !lote.id_user && !!lote.id_lote) // aseguramos que tenga id_lote
+              .filter((lote: Lote) => lote.id_user && adminIds.includes(lote.id_user))
               .map((lote: Lote) => ({
-                id_lote: lote.id_lote as string, // forzamos que no sea undefined
+              id_lote: lote.id_lote as string, // forzamos que no sea undefined
               }));
           }
         });

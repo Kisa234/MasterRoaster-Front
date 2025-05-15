@@ -23,7 +23,7 @@
       </label>
 
       <label class="block">
-        <span class="text-white">Cantidad</span>
+        <span class="text-white">Cantidad (Gr)</span>
         <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.cantidad"/>
       </label>
 
@@ -36,9 +36,14 @@
 
       <label class="block">
         <span class="text-white">Lote</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_lote">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (change)="getCantidadLote()" [(ngModel)]="nuevopedido.id_lote">
           <option *ngFor="let lote of Lotes" [value]="lote.id_lote">{{ lote.id_lote }}</option>
         </select>
+      </label>
+
+      <label class="block">
+        <span class="text-white">Cantidad disponible (Gr)</span>
+        <input class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [value]="cantidadLote" disabled>
       </label>
 
     </div>

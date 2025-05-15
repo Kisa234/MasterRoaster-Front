@@ -30,7 +30,7 @@ export class PedidoComponent {
   columns = [
     'lote',
     'tipo pedido',
-    'cantidad (KG)',
+    'cantidad (Gr)',
     'estado',
   ];
 
@@ -38,7 +38,7 @@ export class PedidoComponent {
     id: string;
     lote: string;
     'tipo pedido': string;
-    'cantidad (KG)': number;
+    'cantidad (Gr)': number;
     estado: string;
   }[] = [];
 
@@ -49,7 +49,7 @@ export class PedidoComponent {
           id: pedido.id_pedido!,
           lote: pedido.id_lote!,
           'tipo pedido': pedido.tipo_pedido!,
-          'cantidad (KG)': pedido.cantidad!,
+          'cantidad (Gr)': pedido.cantidad!,
           estado: pedido.estado_pedido!,
         }));
       },
