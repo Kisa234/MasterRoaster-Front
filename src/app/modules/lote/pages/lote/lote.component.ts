@@ -30,7 +30,7 @@ export class LoteComponent implements OnInit {
   mostrarModalLoteMuestra: boolean = false;
   loteIdActual: string = '';
 
-  columns = [
+  columnsVerde = [
     'id',
     'productor',
     'finca',
@@ -40,7 +40,7 @@ export class LoteComponent implements OnInit {
     'variedades'
   ];
 
-  rows: {
+  rowsVerde: {
     id: string;
     productor: string;
     finca: string;
@@ -50,11 +50,33 @@ export class LoteComponent implements OnInit {
     variedades: string[];
   }[] = [];
 
+  columnsTostado = [
+    'id',
+    'productor',
+    'finca',
+    'region',
+    'departamento',
+    'peso verde (Gr)',
+    'peso tostado (Gr)',
+
+    'variedades'
+  ];
+
+  rowsTostado: {
+    id: string;
+    productor: string;
+    finca: string;
+    region: string;
+    departamento: string;
+    'peso verde (Gr)': number;
+    'peso tostado (Gr)': number;
+    variedades: string[];
+  }[] = [];
 
   getLotes(){
-    this.loteService.getLotes().subscribe({
+    this.loteService.getLotesVerdes().subscribe({
       next: (response) => {
-        this.rows = response.map((lote) => ({
+        this.rowsVerde = response.map((lote) => ({
           id: lote.id_lote!,
           productor: lote.productor,
           finca: lote.finca,
@@ -66,6 +88,22 @@ export class LoteComponent implements OnInit {
       },
       error: (error) => console.error('Error al obtener los lotes:', error),
     });
+
+    this.loteService.getLotesTostados().subscribe({
+      next: (response) => {
+        this.rowsTostado = response.map((lote) => ({
+          id: lote.id_lote!,
+          productor: lote.productor,
+          finca: lote.finca,
+          region: lote.region,
+          departamento: lote.departamento,
+          'peso verde (Gr)': lote.peso,
+          'peso tostado (Gr)': lote.peso_tostado!,
+          variedades: lote.variedades,
+        }));
+      },
+      error: (error) => console.error('Error al obtener los lotes:', error),  
+    })
   }
 
 

@@ -92,9 +92,13 @@ export class CrearPedidoComponent implements OnInit {
           rol: user.rol 
         }));
 
+        console.log(this.Usuarios);
+
         const adminIds = this.Usuarios
-        .filter(user => user.rol === 'Admin')
+        .filter(user => user.rol === 'admin')
         .map(user => user.id_user);
+
+        console.log(adminIds);
   
         this.LoteService.getLotes().subscribe({
           next: (lotes: Lote[]) => {

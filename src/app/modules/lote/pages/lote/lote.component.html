@@ -1,5 +1,5 @@
 <div class="p-6 space-y-6">
-  <h1 class="text-2xl font-bold">Lotes Cafe Verde</h1>
+  <h2 class="text-2xl font-bold">Lotes Cafe Verde</h2>
 
   <!-- Contenedor para el buscador y el botón -->
   <div class="w-full flex justify-between items-center">
@@ -26,10 +26,23 @@
     </button>
   </div>
 
-  <!-- Tabla reutilizable -->
+  <!-- Tabla Lotes Verdes -->
   <app-table 
-    [columns]="columns"
-    [data]="rows"
+    [columns]="columnsVerde"
+    [data]="rowsVerde"
+    [onEdit]="editRow.bind(this)"
+    [onDelete]="deleteRow.bind(this)"
+    >
+  </app-table>
+
+  <div class="p-6"></div>
+
+  <!-- Tabla Lotes Tostados -->
+  <h2 class="text-2xl font-bold">Lotes Cafe Tostado</h2>
+
+  <app-table 
+    [columns]="columnsTostado"
+    [data]="rowsTostado"
     [onEdit]="editRow.bind(this)"
     [onDelete]="deleteRow.bind(this)"
     >

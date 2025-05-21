@@ -32,6 +32,12 @@ export class LoteService {
   getLotes(): Observable<Lote[]> {
     return this.http.get<Lote[]>(`${this.baseUrl}`);
   }
+  getLotesVerdes(): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.baseUrl}/verdes`);
+  }
+  getLotesTostados(): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.baseUrl}/tostados`);
+  }
 
   createLoteFromMuestra(id_muestra:string, peso:number): Observable<Lote>{
     return this.http.post<Lote>(`${this.baseUrl}/muestra/${id_muestra}`, {peso});

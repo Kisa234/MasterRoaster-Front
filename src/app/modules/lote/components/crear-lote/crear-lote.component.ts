@@ -45,6 +45,7 @@ export class CrearLoteComponent implements OnInit {
     peso: 0,
     variedades: [],
     proceso: '',
+    tipo_lote: '',
   };
 
   variedadesArabica: string[] = [
