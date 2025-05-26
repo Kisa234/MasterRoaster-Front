@@ -35,19 +35,26 @@
           <input type="date" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.fecha_tueste"/>
         </label>
 
-        <label class="block">
+      <label class="block">
           <span class="text-white">Cantidad En Verde</span>
-          <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.cantidad"/>
-        </label>
+          <input 
+          type="number" 
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white" 
+          [(ngModel)]="nuevopedido.cantidad"
+          (input)="actualizarTostadoDesdeVerde()" 
+        />
+      </label>
+      
+      <label class="block">
+        <span class="text-white">Cantidad Tostado</span>
+        <input 
+          type="number" 
+          class="rounded px-3 py-2 w-full bg-gray-800 text-white" 
+          [(ngModel)]="cafeTostado"
+          (input)="actualizarVerdeDesdeTostado()" 
+        />
+      </label>
 
-        <label class="block">
-          <span class="text-white">Cantidad Tostado</span>
-          <input type="number" 
-                class=" rounded px-3 py-2 w-full bg-gray-800 text-white" 
-                readonly
-                [value]="cantidadTostada()"
-          />
-        </label>
 
         <label class="block">
           <span class="text-white">Tipo Tueste</span>

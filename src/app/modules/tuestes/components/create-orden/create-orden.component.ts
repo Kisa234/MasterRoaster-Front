@@ -40,6 +40,7 @@ export class CreateOrdenComponent implements OnInit {
 
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
+  cafeTostado: number = 0;
     
   Usuarios: {
     id_user: string;
@@ -94,15 +95,30 @@ export class CreateOrdenComponent implements OnInit {
     'Peso Tostado',
   ];
   
-  cantidadTostada(): number {
-    return this.nuevopedido?.cantidad 
-      ? parseFloat((this.nuevopedido.cantidad * 0.85).toFixed(2)) 
+
+  private actualizando = false;
+
+  actualizarTostadoDesdeVerde(): void {
+    if (this.actualizando) return;
+    this.actualizando = true;
+    this.cafeTostado = this.nuevopedido.cantidad 
+      ? parseFloat((this.nuevopedido.cantidad / 1.15).toFixed(2)) 
       : 0;
+    this.actualizando = false;
+  }
+  
+  actualizarVerdeDesdeTostado(): void {
+    if (this.actualizando) return;
+    this.actualizando = true;
+    this.nuevopedido.cantidad = this.cafeTostado 
+      ? parseFloat((this.cafeTostado * 1.15).toFixed(2)) 
+      : 0;
+    this.actualizando = false;
   }
   
   actualizarPesoTostado(index: number): void {
     const verde = this.data[index]['Peso Verde'];
-    this.data[index]['Peso Tostado'] = parseFloat((verde * 0.85).toFixed(2));
+    this.data[index]['Peso Tostado'] = parseFloat((verde / 1.15).toFixed(2));
   }
 
   get totalPesoVerde(): number {
@@ -154,7 +170,7 @@ export class CreateOrdenComponent implements OnInit {
       return;
     }
 
-    if (totalPesoTostado !== this.cantidadTostada()) {
+    if (totalPesoTostado !== this.cafeTostado) {
       alert('El peso tostado debe ser igual a la cantidad tostada del pedido');
       return;
     }
