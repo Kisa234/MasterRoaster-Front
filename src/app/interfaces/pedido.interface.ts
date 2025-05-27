@@ -12,5 +12,16 @@ export interface Pedido {
   fecha_tueste  ?:Date|string,
   tostadora     ?:string,
   eliminado     ?:boolean ,
-            
+}
+
+
+export interface updatePedido {
+  id_pedido     :string,
+  cantidad      :number,
+  comentario    :string,
+}
+
+
+export interface updatePedidoOT {
+
 }

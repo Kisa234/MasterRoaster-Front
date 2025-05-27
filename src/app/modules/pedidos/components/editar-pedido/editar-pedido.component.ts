@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Pedido   } from '../../../../interfaces/pedido.interface';
+import { Pedido, updatePedido   } from '../../../../interfaces/pedido.interface';
 import { PedidoService } from '../../service/pedido.service';
 import { LoteService } from '../../../lote/service/lote.service';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -41,11 +41,7 @@ export class EditarPedidoComponent implements OnInit {
     comentario: '',
   };
 
-  update:Pedido = {
-    id_pedido: '',
-    cantidad: 0,
-    comentario: '',
-  }
+  
 
   cantidadLote: number = 0;
 
@@ -113,16 +109,19 @@ export class EditarPedidoComponent implements OnInit {
 
 
   guardar() {
-    this.update.id_pedido = this.pedido.id_pedido;
-    this.update.cantidad = this.pedido.cantidad;
-    this.update.comentario = this.pedido.comentario;
+    
+    const update: updatePedido = {
+      id_pedido: this.pedido.id_pedido!,
+      cantidad: this.pedido.cantidad!,
+      comentario: this.pedido.comentario!,
+    };
 
-    this.pedidoService.updatePedido(this.id_pedido,this.update).subscribe({
-      next:(res)=>{
+    this.pedidoService.updatePedido(this.id_pedido, update).subscribe({
+      next: (res) => {
         this.onAnalisisCreado.emit();
         this.cerrar();
       },
-      error:(err)=>{
+      error: (err) => {
         console.error(err);
       }
     });

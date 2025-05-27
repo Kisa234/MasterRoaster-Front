@@ -32,44 +32,44 @@ export class LoteComponent implements OnInit {
 
   columnsVerde = [
     'id',
+    'peso (Gr)',
     'productor',
     'finca',
     'region',
     'departamento',
-    'peso (Gr)',
     'variedades'
   ];
 
   rowsVerde: {
     id: string;
+    'peso (Gr)': number;
     productor: string;
     finca: string;
     region: string;
     departamento: string;
-    'peso (Gr)': number;
     variedades: string[];
   }[] = [];
 
   columnsTostado = [
     'id',
+    'peso verde (Gr)',
+    'peso tostado (Gr)',
     'productor',
     'finca',
     'region',
     'departamento',
-    'peso verde (Gr)',
-    'peso tostado (Gr)',
 
     'variedades'
   ];
 
   rowsTostado: {
     id: string;
+    'peso verde (Gr)': number;
+    'peso tostado (Gr)': number;
     productor: string;
     finca: string;
     region: string;
     departamento: string;
-    'peso verde (Gr)': number;
-    'peso tostado (Gr)': number;
     variedades: string[];
   }[] = [];
 

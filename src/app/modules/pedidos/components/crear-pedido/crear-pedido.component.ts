@@ -6,6 +6,7 @@ import { LoteService } from '../../../lote/service/lote.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { NgFor } from '@angular/common';
 import { Lote } from '../../../../interfaces/lote.interface';
+import { AlertaService } from '../../../../shared/services/alerta.service';
 
 
 
@@ -25,6 +26,7 @@ export class CrearPedidoComponent implements OnInit {
     private readonly pedidoService: PedidoService,
     private readonly AuthService: AuthService,
     private readonly LoteService: LoteService,
+    private readonly alertaService: AlertaService
   ) {}
 
 
@@ -72,12 +74,12 @@ export class CrearPedidoComponent implements OnInit {
   guardar() {
     this.pedidoService.createPedido(this.nuevopedido).subscribe({
       next:(res)=>{
-        console.log(this.nuevopedido)
+        this.alertaService.mostrar('success', 'Pedido creado exitosamente');
         this.onAnalisisCreado.emit();
         this.cerrar();
       },
       error:(err)=>{
-        console.error(err);
+        this.alertaService.mostrar('error', 'Error al crear el pedido');
       }
     });
   }

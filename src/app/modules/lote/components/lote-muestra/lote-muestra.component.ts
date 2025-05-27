@@ -1,3 +1,4 @@
+import { AlertaService } from './../../../../shared/services/alerta.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoteService } from '../../service/lote.service';
 import { MuestraService } from '../../../muestra/service/muestra.service';
@@ -15,7 +16,8 @@ export class LoteMuestraComponent implements OnInit{
 
   constructor(
     private loteService : LoteService,
-    private muestraService : MuestraService
+    private muestraService : MuestraService,
+    private alertaService: AlertaService
   ) { }
 
   nuevoLote = {
@@ -40,10 +42,13 @@ export class LoteMuestraComponent implements OnInit{
   submit(){
     this.loteService.createLoteFromMuestra(this.nuevoLote.id_muestra, this.nuevoLote.peso).subscribe({  
         next: (response) => {
+          this.alertaService.mostrar('success','Lote de una muestra creado exitosamente'); 
           this.onCreate.emit();
           this.cerrar();
         },
-        error: (error) => console.error('Error al crear el lote:', error)
+        error: (error) => {
+          this.alertaService.mostrar('error', 'Error al crear el lote de la muestra');
+        }
     });
   }
 

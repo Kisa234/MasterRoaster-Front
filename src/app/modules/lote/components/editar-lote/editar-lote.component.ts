@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AuthService } from '../../../auth/services/auth.service';
+import { AlertaService } from '../../../../shared/services/alerta.service';
 
 @Component({
   selector: 'app-editar-lote',
@@ -18,6 +19,7 @@ export class EditarLoteComponent implements OnInit {
   constructor(
     private readonly loteService: LoteService,
     private readonly authService: AuthService,
+    private alertaService: AlertaService
   ) {}
 
   ngOnInit(): void {
@@ -91,10 +93,13 @@ export class EditarLoteComponent implements OnInit {
     console.log(this.nuevoLote);
     this.loteService.updateLote(this.id, {...this.nuevoLote, id_user: ''}).subscribe({
       next: (response) => {
+        this.alertaService.mostrar('success', 'Lote actualizado con éxito');
         this.onCreate.emit();
         this.cerrar();
       },
-      error: (error) => console.error('Error al actualizar el lote:', error)
+      error: (error) => {
+        this.alertaService.mostrar('error', 'Error al actualizar el lote');
+      }
     });
   }
 

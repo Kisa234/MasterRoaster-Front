@@ -5,6 +5,7 @@ import { Lote } from '../../../../interfaces/lote.interface';
 import { NgFor } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AuthService } from '../../../auth/services/auth.service';
+import { AlertaService } from '../../../../shared/services/alerta.service';
 
 @Component({
   selector: 'app-crear-lote',
@@ -19,6 +20,7 @@ export class CrearLoteComponent implements OnInit {
   constructor(
     private readonly loteService: LoteService,
     private readonly authService: AuthService,
+    private alertaService: AlertaService
   ) {}
 
   @Output() onCerrar = new EventEmitter<void>();
@@ -45,13 +47,11 @@ export class CrearLoteComponent implements OnInit {
     peso: 0,
     variedades: [],
     proceso: '',
-    tipo_lote: '',
+    tipo_lote: 'Lote Verde',
   };
 
   variedadesArabica: string[] = [
-    'Typica', 'Bourbon', 'Caturra', 'Catuai', 'Pacamara',
-    'SL28', 'SL34', 'Geisha', 'Mundo Novo', 'Maragogipe',
-    'Villalobos', 'Pacas', 'Ruiru 11', 'Catimor', 'Villa Sarchi'
+    
   ];
 
   private cargarDatos() {
@@ -71,10 +71,13 @@ export class CrearLoteComponent implements OnInit {
     this.nuevoLote.peso = parseFloat(this.nuevoLote.peso.toString());
     this.loteService.createLote(this.nuevoLote).subscribe({
       next: (response) => {
+        this.alertaService.mostrar('success', 'Lote creado con éxito');
         this.onCreate.emit();
         this.cerrar();
       },
-      error: (error) => console.error('Error al crear el lote:', error)
+      error: (error) => {
+        this.alertaService.mostrar('error', 'Error al crear el lote');
+      }
     });
   }
 

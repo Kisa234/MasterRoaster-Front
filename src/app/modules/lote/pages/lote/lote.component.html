@@ -30,7 +30,9 @@
   <app-table 
     [columns]="columnsVerde"
     [data]="rowsVerde"
+    [mostrarEditar]="false"
     [onEdit]="editRow.bind(this)"
+    [mostrarEliminar]="false"
     [onDelete]="deleteRow.bind(this)"
     >
   </app-table>
@@ -43,7 +45,9 @@
   <app-table 
     [columns]="columnsTostado"
     [data]="rowsTostado"
+    [mostrarEditar]="false"
     [onEdit]="editRow.bind(this)"
+    [mostrarEliminar]="false"
     [onDelete]="deleteRow.bind(this)"
     >
   </app-table>

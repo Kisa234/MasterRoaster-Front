@@ -1,1 +1,7 @@
 <router-outlet></router-outlet>
+<app-alerta
+  [tipo]="tipo"
+  [mensaje]="mensaje"
+  [mostrar]="mostrarAlerta"
+  (cerrar)="mostrarAlerta = false">
+</app-alerta>

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MuestraService } from '../../service/muestra.service';
 import { Muestra } from '../../../../interfaces/muestra.interface';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AlertaService } from '../../../../shared/services/alerta.service';
 
 @Component({
   selector: 'app-editar-muestra',
@@ -14,6 +15,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class EditarMuestraComponent implements OnInit {
   constructor(
     private muestraService: MuestraService,
+    private alertaService: AlertaService
+    
   ){}
   ngOnInit(): void {
     if(this.id) {
@@ -62,13 +65,13 @@ export class EditarMuestraComponent implements OnInit {
     console.log(this.nuevaMuestra);
     this.muestraService.updateMuestra(this.id, this.nuevaMuestra).subscribe({
       next: (res) => {
+        this.alertaService.mostrar('success', 'Muestra editada con éxito');
         this.onAnalisisCreado.emit();
         this.cerrar();
       },
       error: (err) => {
-        console.error(err);
-      }
-    })
+        this.alertaService.mostrar('error', `Error al editar la muestra`);
+    }});
   }
 
   cerrar() {

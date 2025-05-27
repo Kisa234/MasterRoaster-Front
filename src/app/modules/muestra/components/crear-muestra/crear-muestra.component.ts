@@ -5,6 +5,7 @@ import { Lote } from '../../../../interfaces/lote.interface';
 import { Muestra } from '../../../../interfaces/muestra.interface';
 import { MuestraService } from '../../service/muestra.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AlertaService } from '../../../../shared/services/alerta.service';
 
 @Component({
   selector: 'app-crearmuestra',
@@ -16,6 +17,7 @@ export class CrearmuestraComponent {
 
   constructor(
     private muestraService: MuestraService,
+    private alertaService: AlertaService
   ){}
 
   @Output() onCerrar = new EventEmitter<void>();
@@ -51,12 +53,12 @@ export class CrearmuestraComponent {
     console.log(this.nuevaMuestra);
     this.muestraService.createMuestra(this.nuevaMuestra).subscribe({
       next: (res) => {
-        console.log(res);
+        this.alertaService.mostrar('success', 'Muestra creada con éxito');
         this.onAnalisisCreado.emit(res); 
         this.cerrar(); 
       },
       error: (err) => {
-        console.error(err);
+        this.alertaService.mostrar('error', `Error al crear la muestra`);
       }
     });
   }
