@@ -1,3 +1,4 @@
+import { AlertaService } from './../../../../shared/services/alerta.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Pedido } from '../../../../interfaces/pedido.interface';
 import { PedidoService } from '../../../pedidos/service/pedido.service';
@@ -29,8 +30,8 @@ export class CreateOrdenComponent implements OnInit {
   constructor(
       private readonly pedidoService: PedidoService,
       private readonly authService: AuthService,
-      private readonly tuesteService: TuesteService,
       private readonly loteService: LoteService,
+      private readonly alertaService: AlertaService,
       
   ) {}
 
@@ -41,7 +42,9 @@ export class CreateOrdenComponent implements OnInit {
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
   cafeTostado: number = 0;
-    
+  pesoVerdeLote: number = 0;
+  pesoTostadoLote: number = 0;
+
   Usuarios: {
     id_user: string;
     nombre: string;
@@ -97,6 +100,19 @@ export class CreateOrdenComponent implements OnInit {
   
 
   private actualizando = false;
+
+  getCantidadLote() {
+    this.loteService.getLoteById(this.nuevopedido.id_lote!).subscribe({
+      next: (res) => {
+        this.pesoVerdeLote = res.peso;
+        this.pesoTostadoLote = res.peso_tostado? res.peso_tostado : 0;
+      },
+      error: (err) => {
+        this.alertaService.mostrar('error', 'Error al obtener peso del lote');
+      }
+    });
+  }
+
 
   actualizarTostadoDesdeVerde(): void {
     if (this.actualizando) return;
@@ -157,7 +173,7 @@ export class CreateOrdenComponent implements OnInit {
     const pesoTostado = this.data.map((row) => row['Peso Tostado']);
     
     if (pesoVerde.some((peso) => peso <= 0) || pesoTostado.some((peso) => peso <= 0)) {
-      alert('El peso verde y tostado deben ser mayores a 0');
+      this.alertaService.mostrar('error', 'Los pesos verde y tostado deben ser mayores a 0');
       return;
     }
 
@@ -166,12 +182,12 @@ export class CreateOrdenComponent implements OnInit {
     const totalPesoTostado = this.totalPesoTostado;
     
     if (totalPesoVerde !== this.nuevopedido.cantidad) {
-      alert('El peso verde debe ser igual a la cantidad del pedido');
+      this.alertaService.mostrar('error', 'El peso verde debe ser igual a la cantidad del pedido');
       return;
     }
 
     if (totalPesoTostado !== this.cafeTostado) {
-      alert('El peso tostado debe ser igual a la cantidad tostada del pedido');
+      this.alertaService.mostrar('error', 'El peso tostado debe ser igual al café tostado calculado');
       return;
     }
 
@@ -184,15 +200,17 @@ export class CreateOrdenComponent implements OnInit {
       }
     }
 
-    console.log(this.nuevopedido);
 
     this.pedidoService.createPedido(this.nuevopedido).subscribe({
       next:(res)=>{
         this.onAnalisisCreado.emit();
         this.cerrar();
+        console.log(this.nuevopedido);
+        this.alertaService.mostrar('success', 'Pedido creado exitosamente');
       },
       error:(err)=>{
-        console.error(err);
+        console.log(this.nuevopedido);
+        this.alertaService.mostrar('error', 'Error al crear el pedido');
       }
     });
   }

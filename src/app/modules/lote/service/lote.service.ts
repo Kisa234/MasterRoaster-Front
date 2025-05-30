@@ -42,4 +42,8 @@ export class LoteService {
   createLoteFromMuestra(id_muestra:string, peso:number): Observable<Lote>{
     return this.http.post<Lote>(`${this.baseUrl}/muestra/${id_muestra}`, {peso});
   }  
+
+  getUserByLoteId(id: string): Observable<string> {
+    return this.http.get<string>(`${this.baseUrl}/byLote/${id}`);
+  }
 }

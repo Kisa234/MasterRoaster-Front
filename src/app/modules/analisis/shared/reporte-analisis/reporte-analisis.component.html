@@ -1,0 +1,210 @@
+
+<div class="fixed inset-0 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-50 " (click)="cerrar()">
+    <div class="bg-gray-900 p-4 rounded-lg shadow-lg relative w-[80%]" (click)="$event.stopPropagation()">
+        <!-- Botón de cerrar -->
+        <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
+
+        <!-- Título principal -->
+        <h2 class="text-xl font-bold text-white text-center mb-2.5">Reporte De Lote</h2>
+
+        <div class="flex flex-col gap-4 text-sm">
+            <div class="bg-gray-800 p-4 rounded-lg flex-1">
+                <table class=" text-white border border-gray-700 w-full">
+                        <thead>
+                            <tr class="bg-gray-700">
+                                <th class="p-1.5 border border-gray-600">Productor</th>
+                                <th class="p-1.5 border border-gray-600">Finca</th>
+                                <th class="p-1.5 border border-gray-600">Región</th>
+                                <th class="p-1.5 border border-gray-600">Departamento</th>
+                                <th class="p-1.5 border border-gray-600">Peso (kg)</th>
+                                <th class="p-1.5 border border-gray-600">Variedades</th>
+                                <th class="p-1.5 border border-gray-600">Proceso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td class="p-1.5 border border-gray-600">{{ lote.productor }}</td>
+                                <td class="p-1.5 border border-gray-600">{{ lote.finca }}</td>
+                                <td class="p-1.5 border border-gray-600">{{ lote.region }}</td>
+                                <td class="p-1.5 border border-gray-600">{{ lote.departamento }}</td>
+                                <td class="p-1.5 border border-gray-600">{{ lote.peso }}</td>
+                                <td class="p-1.5 border border-gray-600">{{ lote.variedades }}</td>
+                                <td class="p-1.5 border border-gray-600">{{lote.proceso}}</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="flex flex-1 gap-4">
+                <div class=" ">
+                    <div class="bg-gray-800 p-4 rounded-lg flex flex-col ">
+                        <h3 class="text-xl font-semibold text-white mb-4 text-center">Análisis Sensorial</h3>
+                        <div class="flex gap-4">
+                            <table class="text-white border border-gray-700 w-full">
+                                <tbody>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Fragancia/Aroma</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.fragancia_aroma }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Sabor</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.sabor }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Sabor Residual</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.sabor_residual }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Acidez</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.acidez }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Cuerpo</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.cuerpo }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Uniformidad</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.uniformidad }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Balance</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.balance }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="text-white border border-gray-700 w-full">
+                                <tbody>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Taza Limpia</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.taza_limpia }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Dulzor</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.dulzor }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Puntaje Catador</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.puntaje_catador }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Def. Ligero</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.taza_defecto_ligero }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Rechazo</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.tazas_defecto_rechazo }}
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Puntaje Taza</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.puntaje_taza }}</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-600">
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Comentario</td>
+                                        <td class="p-1.5 italic text-gray-400 text-right">{{
+                                            analisisSensorial.comentario || '—' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1.5 font-semiBold bg-gray-700 w-1/3">Fecha Registro</td>
+                                        <td class="p-1.5 text-right">{{ analisisSensorial.fecha_registro |
+                                            formatoFecha }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <app-spider-graph
+                    [data]="data"
+                    [radarChartLabels]="radarChartLabels" 
+                    >
+                    </app-spider-graph>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="bg-gray-800 p-4 rounded-lg flex flex-col gap-5 ">
+                    <h3 class="text-xl font-semibold text-white text-center">Análisis Físico </h3>
+                    <table class=" text-white border border-gray-700 table-fixed">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <td class="p-1.5 font-semibold">Fecha</td>
+                                <td class="p-1.5 font-semibold">Muestra</td>
+                                <td class="p-1.5 font-semibold">Pergamino</td>
+                                <td class="p-1.5 font-semibold">WA</td>
+                                <td class="p-1.5 font-semibold">Temp. WA</td>
+                                <td class="p-1.5 font-semibold">Humedad</td>
+                                <td class="p-1.5 font-semibold">Temp. Humedad</td>
+                                <td class="p-1.5 font-semibold">Densidad</td>
+                                <td class="p-1.5 font-semibold">Color</td>
+                                <td class="p-1.5 font-semibold">Olor</td>
+                                <td class="p-1.5 font-semibold">Malla 18</td>
+                                <td class="p-1.5 font-semibold">Malla 16</td>
+                                <td class="p-1.5 font-semibold">Malla 16</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-gray-600">
+                                <td class="p-1.5">{{ analisisFisico.fecha_registro | formatoFecha }}</td>
+                                <td class="p-1.5">{{ analisisFisico.peso_muestra }}</td>
+                                <td class="p-1.5">{{ analisisFisico.peso_pergamino }}</td>
+                                <td class="p-1.5">{{ analisisFisico.wa }}</td>
+                                <td class="p-1.5">{{ analisisFisico.temperatura_wa }}</td>
+                                <td class="p-1.5">{{ analisisFisico.humedad }}</td>
+                                <td class="p-1.5">{{ analisisFisico.temperatura_humedad }}</td>
+                                <td class="p-1.5">{{ analisisFisico.densidad }}</td>
+                                <td class="p-1.5">{{ analisisFisico.color_grano_verde }}</td>
+                                <td class="p-1.5">{{ analisisFisico.olor }}</td>
+                                <td class="p-1.5">{{ analisisFisico.superior_malla_18 }}</td>
+                                <td class="p-1.5">{{ analisisFisico.superior_malla_16 }}</td>
+                                <td class="p-1.5">{{ analisisFisico.superior_malla_16 }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <table class=" text-white border border-gray-700 table-fixed">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <td class="p-1.5 font-semibold">Defectos</td>
+                                <td class="p-1.5 font-semibold">Quaquers</td>
+                                <td class="p-1.5 font-semibold">Muestra Tostada</td>
+                                <td class="p-1.5 font-semibold">Desarrollo</td>
+                                <td class="p-1.5 font-semibold">% Caram.</td>
+                                <td class="p-1.5 font-semibold">C. Desarrollo</td>
+                                <td class="p-1.5 font-semibold">Defectos Primarios</td>
+                                <td class="p-1.5 font-semibold">Defectos Secundarios</td>
+                                <td class="p-1.5 font-semibold">Grado</td>
+                                <td class="p-1.5 font-semibold">Comentario</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-gray-600">
+                                <td class="p-1.5">{{ analisisFisico.peso_defectos }}</td>
+                                <td class="p-1.5">{{ analisisFisico.quaquers }}</td>
+                                <td class="p-1.5">{{ analisisFisico.peso_muestra_tostada }}</td>
+                                <td class="p-1.5">{{ analisisFisico.desarrollo }}</td>
+                                <td class="p-1.5">{{ analisisFisico.pocentaje_caramelizcacion }}</td>
+                                <td class="p-1.5">{{ analisisFisico.c_desarrollo }}</td>
+                                <td class="p-1.5">
+                                    <ul class="list-disc list-inside">
+                                        <li *ngFor="let d of analisisFisico.defectos_primarios">{{ d }}</li>
+                                    </ul>
+                                </td>
+                                <td class="p-1.5">
+                                    <ul class="list-disc list-inside">
+                                        <li *ngFor="let d of analisisFisico.defectos_secundarios">{{ d }}</li>
+                                    </ul>
+                                </td>
+                                <td class="p-1.5">{{ analisisFisico.grado }}</td>
+                                <td class="p-1.5 italic text-gray-400">{{ analisisFisico.comentario || '—' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

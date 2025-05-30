@@ -50,9 +50,39 @@ export class CrearLoteComponent implements OnInit {
     tipo_lote: 'Lote Verde',
   };
 
-  variedadesArabica: string[] = [
-    
+  variedadesArabica: string[] = [  
+    "Typica",
+    "Bourbon",
+    "Mundo Novo",
+    "Maragogipe",
+    "Caturra",
+    "Villa Sarchí",
+    "Pacas",
+    "Catuaí",
+    "Geisha (Gesha)",
+    "Pacamara",
+    "Sarchimor",
+    "Catimor",
+    "SL28",
+    "SL34",
+    "Castillo",
+    "Cenicafé 1",
+    "Tabi",
+    "Híbridos F1",
+    "Moka",
+    "Jamaica Blue Mountain",
+    "Kona",
+    "Marshell",
+    "Sidra",
+    "Bourbon Amarillo",
+    "Bourbon Rosado",
+    "Bourbon Enano",
+    "Caturra Amarillo",
+    "Papayo",
+    "Arara"
   ];
+
+  
 
   private cargarDatos() {
     this.authService.getUsers().subscribe({

@@ -1,3 +1,4 @@
+import { AlertaService } from './../../../../shared/services/alerta.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tueste } from '../../../../interfaces/tueste.interface';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ export class CompleteTuesteComponent implements OnInit {
 
   constructor(
     private readonly tuesteservice: TuesteService,
+    private readonly alertaService :AlertaService
   ) {}
 
   @Input()  id: string = '';
@@ -59,13 +61,16 @@ export class CompleteTuesteComponent implements OnInit {
   }
   
   submit(){
-    console.log(this.tueste);
+    console.log(this.tueste)
     this.tuesteservice.completarTostado(this.id, this.tueste).subscribe(
       (res) => {
+        this.alertaService.mostrar('success','Tueste completado con exito');
         this.onComplete.emit();
+        this.onCerrar.emit()
+
       },
       (error) => {
-        console.error('Error al completar el tueste:', error);
+        this.alertaService.mostrar('error','Error al completa el tueste');
       }
     );
   }

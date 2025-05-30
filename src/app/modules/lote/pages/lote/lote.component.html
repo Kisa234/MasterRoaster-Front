@@ -34,6 +34,8 @@
     [onEdit]="editRow.bind(this)"
     [mostrarEliminar]="false"
     [onDelete]="deleteRow.bind(this)"
+    (rowClick)="abrirReporte($event)"
+
     >
   </app-table>
 
@@ -49,6 +51,7 @@
     [onEdit]="editRow.bind(this)"
     [mostrarEliminar]="false"
     [onDelete]="deleteRow.bind(this)"
+    (rowClick)="abrirReporte($event)"
     >
   </app-table>
 
@@ -71,4 +74,13 @@
     (onCerrar)="cerrarModal()"
     (onAnalisisCreado)="actualizarLotes()">
   </app-lote-muestra>
+
+  <app-reporte-analisis
+    *ngIf="mostrarReporte"
+    [id] = "loteIdActual"
+    (onCerrar)="cerrarModal()"
+    >
+  </app-reporte-analisis>
+
+  <app-agregar-analisis></app-agregar-analisis>
 </div>

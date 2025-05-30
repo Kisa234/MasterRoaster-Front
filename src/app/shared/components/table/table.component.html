@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data" class="border-b text-white border-gray-600 hover:bg-gray-700">
+      <tr *ngFor="let row of data" (click)="rowClick.emit(row)" class="border-b text-white border-gray-600 hover:bg-gray-700">
         <td *ngFor="let column of columns" class="p-3">{{ row[column] || 'N/A' }}</td>
         <td *ngIf="mostrarCompletar" class="p-3">
           <button

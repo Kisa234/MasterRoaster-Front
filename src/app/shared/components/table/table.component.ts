@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -17,4 +17,5 @@ export class TableComponent {
   @Input() mostrarCompletar = false;
   @Input() mostrarEliminar = true;
   @Input() mostrarEditar = true;
+  @Output() rowClick = new EventEmitter<any>();
 }

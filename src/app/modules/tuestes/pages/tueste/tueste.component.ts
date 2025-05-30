@@ -146,6 +146,7 @@ export class TuesteComponent {
     this.pedidoService.completarPedido(row.id).subscribe({
       next: (response) => {
         this.getPedidos();
+        this.getPedidos();
       },
       error: (error) => {
         console.error(error);

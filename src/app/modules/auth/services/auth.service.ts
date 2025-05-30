@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   // Obtener un usuario por ID
-  getUserById(id: number): Observable<any> {
+  getUserById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 

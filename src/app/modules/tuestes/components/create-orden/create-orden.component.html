@@ -11,7 +11,7 @@
     <!-- Botón de cerrar -->
     <button class="absolute top-3 right-4 text-white text-lg" (click)="cerrar()">&times;</button>
 
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-4 gap-4">
 
         <label class="block">
           <span class="text-white">Clientes</span>
@@ -25,37 +25,48 @@
 
         <label class="block">
           <span class="text-white">Lote</span>
-          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.id_lote">
+          <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (change)="getCantidadLote()" [(ngModel)]="nuevopedido.id_lote">
             <option *ngFor="let lote of Lotes" [value]="lote.id_lote">{{ lote.id_lote }}</option>
           </select>
         </label>
 
         <label class="block">
-          <span class="text-white">Fecha de Tueste</span>
-          <input type="date" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.fecha_tueste"/>
+          <span class="text-white">Peso Verde disponible (Gr)</span>
+          <input class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  [value]="pesoVerdeLote" disabled>
         </label>
 
-      <label class="block">
+
+        <label class="block">
+          <span class="text-white">Peso Tostado disponible (Gr)</span>
+          <input class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  [value]="pesoTostadoLote" disabled>
+        </label>
+
+        
+        <label class="block">
           <span class="text-white">Cantidad En Verde</span>
           <input 
           type="number" 
           class="rounded px-3 py-2 w-full bg-gray-800 text-white" 
           [(ngModel)]="nuevopedido.cantidad"
           (input)="actualizarTostadoDesdeVerde()" 
-        />
-      </label>
-      
-      <label class="block">
-        <span class="text-white">Cantidad Tostado</span>
-        <input 
+          />
+        </label>
+        
+        <label class="block">
+          <span class="text-white">Cantidad Tostado</span>
+          <input 
           type="number" 
           class="rounded px-3 py-2 w-full bg-gray-800 text-white" 
           [(ngModel)]="cafeTostado"
           (input)="actualizarVerdeDesdeTostado()" 
-        />
-      </label>
-
-
+          />
+        </label>
+        
+        <label class="block">
+          <span class="text-white">Fecha de Tueste</span>
+          <input type="date" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.fecha_tueste"/>
+        </label>
+        
         <label class="block">
           <span class="text-white">Tipo Tueste</span>
           <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevopedido.comentario">

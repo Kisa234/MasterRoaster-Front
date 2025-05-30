@@ -2,7 +2,7 @@ import { NgIf, NgFor } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnalisisSensorialService } from '../../service/analisis-sensorial.service';
-import { analisisSensorial } from '../../../../../interfaces/analisisSensorial.interface';
+import { AnalisisSensorial } from '../../../../../interfaces/analisisSensorial.interface';
 
 @Component({
   selector: 'app-crear-analisis-sensorial',
@@ -23,7 +23,7 @@ export class CrearAnalisisSensorialComponent implements OnInit {
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
-  nuevoAnalisis:analisisSensorial = {
+  nuevoAnalisis:AnalisisSensorial = {
     fragancia_aroma: 0,
     sabor: 0,
     sabor_residual: 0,

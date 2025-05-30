@@ -1,4 +1,4 @@
-export interface analisisSensorial {
+export interface AnalisisSensorial {
 
   id_analisis_sensorial: string,
   fragancia_aroma: number,

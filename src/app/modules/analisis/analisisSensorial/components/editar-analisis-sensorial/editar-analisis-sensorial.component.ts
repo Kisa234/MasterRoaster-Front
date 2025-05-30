@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnalisisSensorialService } from '../../service/analisis-sensorial.service';
-import { analisisSensorial } from '../../../../../interfaces/analisisSensorial.interface';
+import { AnalisisSensorial } from '../../../../../interfaces/analisisSensorial.interface';
 
 @Component({
   selector: 'app-editar-analisis-sensorial',
@@ -18,7 +18,7 @@ export class EditarAnalisisSensorialComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.analisisService.getAnalisisSensorialById(this.id).subscribe( {
+    this.analisisService.getAnalisisById(this.id).subscribe( {
       next: (response) => {
         if (response) {
           this.nuevoAnalisis = response;
@@ -32,7 +32,7 @@ export class EditarAnalisisSensorialComponent implements OnInit {
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
-  nuevoAnalisis:analisisSensorial = {
+  nuevoAnalisis:AnalisisSensorial = {
     id_analisis_sensorial: this.id,
     fragancia_aroma: 0,
     sabor: 0,

@@ -9,7 +9,7 @@ export interface Lote {
   peso_tostado?: number,
   variedades: string[],
   proceso: string,
-  tipo_lote: string,
+  tipo_lote?: string,
   fecha_registro?: Date, 
   eliminado?: boolean,
   id_user?: string,

@@ -1,3 +1,4 @@
+import { AlertaService } from './../../../../shared/services/alerta.service';
 import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { RouterModule } from '@angular/router';
@@ -7,17 +8,28 @@ import { LoteService } from '../../service/lote.service';
 import { CrearLoteComponent } from '../../components/crear-lote/crear-lote.component';
 import { EditarLoteComponent } from '../../components/editar-lote/editar-lote.component';
 import { LoteMuestraComponent } from '../../components/lote-muestra/lote-muestra.component';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ReporteAnalisisComponent } from "../../../analisis/shared/reporte-analisis/reporte-analisis.component";
+import { AgregarAnalisisComponent } from "../../../analisis/shared/agregar-analisis/agregar-analisis.component";
+import { CrearAnalisisComponent } from '../../../analisis/analisisRapido/components/crear-analisis/crear-analisis.component';
+
 
 
 @Component({
   selector: 'app-lote',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearLoteComponent, EditarLoteComponent, LoteMuestraComponent],
+  imports: [
+    NgIf, FormsModule, RouterModule, TableComponent,
+    CrearLoteComponent, EditarLoteComponent, LoteMuestraComponent,
+    ReporteAnalisisComponent, AgregarAnalisisComponent, CrearAnalisisComponent
+  ],
   templateUrl: './lote.component.html',
 
 })
 export class LoteComponent implements OnInit {
   constructor(
-    private readonly loteService:LoteService,
+    private readonly loteService: LoteService,
+    private readonly alertaService:AlertaService
   ){}
 
   ngOnInit() {
@@ -28,11 +40,13 @@ export class LoteComponent implements OnInit {
   mostrarModal: boolean = false;
   mostrarModalLote: boolean = false;
   mostrarModalLoteMuestra: boolean = false;
+  mostrarReporte: boolean=false ;
   loteIdActual: string = '';
 
   columnsVerde = [
     'id',
     'peso (Gr)',
+    'Cliente',
     'productor',
     'finca',
     'region',
@@ -42,74 +56,109 @@ export class LoteComponent implements OnInit {
 
   rowsVerde: {
     id: string;
-    'peso (Gr)': number;
+    'peso (Gr)': string;
+    Cliente: string;
     productor: string;
     finca: string;
     region: string;
     departamento: string;
     variedades: string[];
+    id_analisis:string;
   }[] = [];
 
   columnsTostado = [
     'id',
+    'Cliente',
     'peso verde (Gr)',
     'peso tostado (Gr)',
     'productor',
     'finca',
     'region',
     'departamento',
-
     'variedades'
   ];
 
   rowsTostado: {
     id: string;
-    'peso verde (Gr)': number;
-    'peso tostado (Gr)': number;
+    'Cliente': string;
+    'peso verde (Gr)': string;
+    'peso tostado (Gr)': string;
     productor: string;
     finca: string;
     region: string;
     departamento: string;
     variedades: string[];
+    id_analisis :string;
   }[] = [];
 
-  getLotes(){
-    this.loteService.getLotesVerdes().subscribe({
-      next: (response) => {
-        this.rowsVerde = response.map((lote) => ({
-          id: lote.id_lote!,
-          productor: lote.productor,
-          finca: lote.finca,
-          region: lote.region,
-          departamento: lote.departamento,
-          'peso (Gr)': lote.peso,
-          variedades: lote.variedades,
-        }));
-      },
-      error: (error) => console.error('Error al obtener los lotes:', error),
-    });
+  getLotes() {
+  this.loteService.getLotesVerdes().subscribe({
+    next: (response) => {
+      const observables = response.map((lote) =>
+        this.loteService.getUserByLoteId(lote.id_lote!).pipe(
+          map((cliente:string) => ({
+            id: lote.id_lote!,
+            Cliente: cliente,
+            productor: lote.productor,
+            finca: lote.finca,
+            region: lote.region,
+            departamento: lote.departamento,
+            'peso (Gr)': lote.peso.toLocaleString('en-US'),
+            variedades: lote.variedades,
+            id_analisis: lote.id_analisis? lote.id_analisis : ''
+          }))
+        )
+      );
 
-    this.loteService.getLotesTostados().subscribe({
-      next: (response) => {
-        this.rowsTostado = response.map((lote) => ({
-          id: lote.id_lote!,
-          productor: lote.productor,
-          finca: lote.finca,
-          region: lote.region,
-          departamento: lote.departamento,
-          'peso verde (Gr)': lote.peso,
-          'peso tostado (Gr)': lote.peso_tostado!,
-          variedades: lote.variedades,
-        }));
-      },
-      error: (error) => console.error('Error al obtener los lotes:', error),  
-    })
-  }
+      forkJoin(observables).subscribe((results) => {
+        this.rowsVerde = results;
+      });
+    },
+    error: (error) => console.error('Error al obtener los lotes verdes:', error),
+  });
+
+  this.loteService.getLotesTostados().subscribe({
+    next: (response) => {
+      const observables = response.map((lote) =>
+        this.loteService.getUserByLoteId(lote.id_lote!).pipe(
+          map((cliente:string) => ({
+            id: lote.id_lote!,
+            Cliente: cliente,
+            productor: lote.productor,
+            finca: lote.finca,
+            region: lote.region,
+            departamento: lote.departamento,
+            'peso verde (Gr)': lote.peso.toLocaleString('en-US'),
+            'peso tostado (Gr)': lote.peso_tostado!.toLocaleString('en-US'),
+            variedades: lote.variedades,
+            id_analisis: lote.id_analisis? lote.id_analisis : ''
+          }))
+        )
+      );
+
+      forkJoin(observables).subscribe((results) => {
+        this.rowsTostado = results;
+      });
+    },
+    error: (error) => console.error('Error al obtener los lotes tostados:', error),
+  });
+}
+
 
 
 
   abrirModal() {
     this.mostrarModal = true;
+  }
+
+  abrirReporte(row: any) {
+    if(row.id_analisis){
+      this.loteIdActual = row.id;
+      this.mostrarReporte = true;
+    }else{
+      this.alertaService.mostrar('error', "este lote no tiene un analisis asosciado")
+    }
+
   }
 
   abrirModalMuestra() {
@@ -120,6 +169,7 @@ export class LoteComponent implements OnInit {
     this.mostrarModal = false;
     this.mostrarModalLote = false;
     this.mostrarModalLoteMuestra = false;
+    this.mostrarReporte = false;
 
   }
 
