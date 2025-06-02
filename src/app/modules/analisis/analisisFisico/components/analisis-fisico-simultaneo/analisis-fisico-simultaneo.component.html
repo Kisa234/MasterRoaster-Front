@@ -1,0 +1,61 @@
+<p>analisis-fisico works!</p>
+
+<div class="fixed inset-0 bg-opacity-30 backdrop-blur-md flex items-center justify-center" (click)="cerrar()">
+    <div class="bg-gray-900 p-4 rounded-lg shadow-lg w-[80%] flex flex-col relative" (click)="$event.stopPropagation()">
+
+        <!-- header -->
+        <div class="flex justify-center items-center border-b border-gray-700 w-full">
+            <!-- Botón de cerrar -->
+            <a class="absolute top-2 right-6 text-white text-lg" (click)="cerrar()">&times;</a>
+            <!-- Título principal -->
+            <h2 class="text-xl font-bold text-white text-center mb-2.5">Crear/Editar Analisis de Lotes</h2>
+            
+        </div>
+        <!-- body -->
+        <div class="flex">
+           <div class="flex-4 p-5">
+                <app-crear-analisis
+                    [analisis]="analisis">
+                </app-crear-analisis>
+                
+           </div>
+           <div class="flex flex-col flex-1 border-l border-gray-700 justify-between">
+                <div class="flex flex-col">
+
+                    <div
+                        *ngFor="let item of selecciones"
+                        class="text-white block px-4 space-y-4 p-6 border-gray-700 cursor-pointer relative hover:bg-[#264653]"
+                        (click)="mostrarAnalisisDe(item)">
+                        {{ item.tipo }}: {{ item.id }}
+                        <span class="ml-2 text-sm"
+                              [ngClass]="{
+                                'text-yellow-400': analisisPorItem[item.id].modo === 'nuevo',
+                                'text-green-400': analisisPorItem[item.id].modo === 'editar'
+                              }">
+                          ({{ analisisPorItem[item.id].modo }})
+                        </span>
+                        <a class="absolute top-2 right-6 text-white text-lg" (click)="eliminarSeleccion(item,$event)">&times;</a>
+
+                    </div>
+                
+                    <!-- Botón para abrir el modal -->
+                    <a class="text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700 cursor-pointer"
+                       (click)="abrirAgregar()">Agregar</a>
+                
+                    <!-- Componente agregar lote/muestra -->
+                    <app-agregar-lote-muestra
+                      *ngIf="mostrarAgregar"
+                      (onSubmit)="guardarSeleccion($event)"
+                      (onCerrar)="cerrarAgregar()"
+                    >
+                    </app-agregar-lote-muestra>
+                </div>
+                <!-- boton guardar -->
+                <div class="flex flex-col">
+                    <a class="text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700">Guardar</a>
+                </div>
+           </div>
+        </div>
+
+    </div>
+</div>

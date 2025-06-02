@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AnalisisSensorialService } from '../../service/analisis-sensorial.service';
 import { EditarAnalisisSensorialComponent } from '../../components/editar-analisis-sensorial/editar-analisis-sensorial.component';
+import { AnalisisSensorialSimultaneoComponent } from '../../components/analisis-sensorial-simultaneo/analisis-sensorial-simultaneo.component';
 
 @Component({
   selector: 'app-analisis-sensorial',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent,CrearAnalisisSensorialComponent,EditarAnalisisSensorialComponent],
+  imports: [NgIf, FormsModule, RouterModule, TableComponent,AnalisisSensorialSimultaneoComponent,EditarAnalisisSensorialComponent],
   templateUrl: './analisis-sensorial.component.html',
 })
 export class AnalisisSensorialComponent implements OnInit {

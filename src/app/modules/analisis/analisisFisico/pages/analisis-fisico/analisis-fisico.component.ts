@@ -1,19 +1,19 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import {  RouterModule } from '@angular/router';
 import { TableComponent } from '../../../../../shared/components/table/table.component';
-import { CrearAnalisisFisicoComponent } from "../../components/crear-analisis/crear-analisis.component";
 import { AnalisisFisicoService } from '../../service/analisis-fisico.service';
 import { AnalisisFisico } from '../../../../../interfaces/analisisFisico.interface';
 import { EditarAnalisisFisicoComponent } from '../../components/editar-analisis-fisico/editar-analisis-fisico.component';
+import { AnalisisFisicoSimultaneoComponent } from '../../components/analisis-fisico-simultaneo/analisis-fisico-simultaneo.component';
 
 
 @Component({
   selector: 'app-analisis-fisico',
   standalone: true,
   templateUrl: './analisis-fisico.component.html',
-  imports: [NgIf, FormsModule, RouterModule, TableComponent, CrearAnalisisFisicoComponent,EditarAnalisisFisicoComponent]
+  imports: [NgIf, FormsModule, RouterModule, TableComponent, AnalisisFisicoSimultaneoComponent,EditarAnalisisFisicoComponent]
 })
 export class AnalisisFisicoComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class AnalisisFisicoComponent implements OnInit {
   }
 
   filtro: string = '';
-  mostrarModal: boolean = false;
+  mostrarModalCrear: boolean = false;
   mostrarModalEditar: boolean = false;
   AnalisisIdActual : string = '';
 
@@ -57,11 +57,11 @@ export class AnalisisFisicoComponent implements OnInit {
   }
 
   abrirModal() {
-    this.mostrarModal = true;
+    this.mostrarModalCrear = true;
   }
 
   cerrarModal() {
-    this.mostrarModal = false;
+    this.mostrarModalCrear = false;
     this.mostrarModalEditar = false;
   }
 

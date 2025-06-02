@@ -23,6 +23,11 @@ export class CrearAnalisisFisicoComponent {
   @Input() id: string = "";
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
+  @Input() set analisis(value: AnalisisFisico | null) {
+    if (value) {
+      this.nuevoAnalisis = { ...value };
+    }
+  }
 
   nuevoAnalisis:AnalisisFisico = {
     peso_muestra: 0,

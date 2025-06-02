@@ -78,9 +78,13 @@
   <app-reporte-analisis
     *ngIf="mostrarReporte"
     [id] = "loteIdActual"
-    (onCerrar)="cerrarModal()"
-    >
+    (onCerrar)="cerrarModal()">
   </app-reporte-analisis>
 
-  <app-agregar-analisis></app-agregar-analisis>
+  <app-agregar-analisis
+    *ngIf="mostrarCrearAnalisis"
+    [id] = "loteIdActual"
+    (onCerrar)="cerrarModal()"
+    (onAnalisisCreado)="actualizarLotes()">
+  </app-agregar-analisis>
 </div>

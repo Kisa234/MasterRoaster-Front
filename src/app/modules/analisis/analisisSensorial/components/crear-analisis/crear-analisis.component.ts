@@ -1,5 +1,5 @@
 import { NgIf, NgFor } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnalisisSensorialService } from '../../service/analisis-sensorial.service';
 import { AnalisisSensorial } from '../../../../../interfaces/analisisSensorial.interface';
@@ -10,30 +10,33 @@ import { AnalisisSensorial } from '../../../../../interfaces/analisisSensorial.i
   templateUrl: './crear-analisis.component.html',
   imports: [ FormsModule]
 })
-export class CrearAnalisisSensorialComponent implements OnInit {
+export class CrearAnalisisSensorialComponent  {
   
   constructor(
     private readonly analisisSensorialService: AnalisisSensorialService
   ) {}
 
-  ngOnInit(): void {
-    this.calcularPuntajeTaza();
+  @Input() set analisis(value: AnalisisSensorial) {
+  if (value) {
+    this.nuevoAnalisis = { ...value };
+    this.calcularPuntajeTaza(); // si aplica
   }
+}
 
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
 
   nuevoAnalisis:AnalisisSensorial = {
-    fragancia_aroma: 0,
-    sabor: 0,
-    sabor_residual: 0,
-    acidez: 0,
-    cuerpo: 0,
-    uniformidad: 0,
+    fragancia_aroma: 6,
+    sabor: 6,
+    sabor_residual: 6,
+    acidez: 6,
+    cuerpo: 6,
+    uniformidad: 6,
     balance: 10,
     taza_limpia: 10,
     dulzor: 10,
-    puntaje_catador: 0,
+    puntaje_catador: 6,
     taza_defecto_ligero: 0,
     tazas_defecto_rechazo: 0,
     puntaje_taza: 0,

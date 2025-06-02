@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AlertaComponent } from './shared/components/alerta/alerta.component';
 import { AlertaService } from './shared/services/alerta.service'; 
+import { ConfirmacionComponent } from './shared/components/confirmacion/confirmacion.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, AlertaComponent],
+  imports: [RouterModule, AlertaComponent,ConfirmacionComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
@@ -26,4 +27,7 @@ export class AppComponent {
       }, 3000);
     });
   }
+
+
+ 
 }

@@ -17,12 +17,6 @@
         (click)="abrirModal()">
         Agregar Análisis
       </button>
-
-      <button
-        class="bg-[#f4a261] text-white px-4 py-2 rounded hover:bg-[#e76f51] transition"
-        (click)="abrirModal()">
-        Agregar Análisis Rapido
-      </button>
     </div>
 
     <!-- Tabla  -->
@@ -34,11 +28,11 @@
     </app-table>
 
     <!-- Crear Analisis -->
-    <app-crear-analisis
-      *ngIf="mostrarModal"
+    <app-analisis-fisico-simultaneo
+      *ngIf="mostrarModalCrear"
       (onCerrar)="cerrarModal()"
       (onAnalisisCreado)="actualizarAnalisis()">
-    </app-crear-analisis>
+    </app-analisis-fisico-simultaneo>
 
     <!-- Editar Analisis -->
     <app-editar-analisis-fisico

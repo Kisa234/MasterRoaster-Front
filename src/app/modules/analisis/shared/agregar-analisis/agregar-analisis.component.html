@@ -1,1 +1,42 @@
-<p>agregar-analisis works!</p>
+
+<div class="fixed inset-0 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-50 " (click)="cerrar()">
+    <div class="bg-gray-900 p-4 rounded-lg shadow-lg w-[80%] flex flex-col relative" (click)="$event.stopPropagation()">
+
+        <!-- header -->
+        <div class="flex justify-center items-center border-b border-gray-700 w-full">
+            <!-- Botón de cerrar -->
+            <a class="absolute top-2 right-6 text-white text-lg" (click)="cerrar()">&times;</a>
+    
+            <!-- Título principal -->
+            <h2 class="text-xl font-bold text-white text-center mb-2.5">Crear Analisis de Lote {{id}}</h2>
+            
+        </div>
+        <!-- body -->
+        <div class="flex">
+           <div class="flex-4 p-5">
+                <app-crear-analisis-sensorial
+                    *ngIf="this.as">
+                </app-crear-analisis-sensorial>
+                <app-crear-analisis
+                    *ngIf="this.af">
+                </app-crear-analisis>
+                
+           </div>
+           <div class="flex flex-col flex-1 border-l border-gray-700 justify-between">
+                <div class="flex flex-col">
+                   <!-- boton a.f -->
+                    <a class=" text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700" (click)="AnalisisFisico()">Análisis Fisico</a>
+                   <!-- boton a.s -->
+                    <a class=" text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700" (click)="AnalisisSensorial()">Análisis Sensorial</a>
+                   <!-- boton a.r -->
+                    <a class=" text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700" (click)="Reporte()">Reporte</a>
+                </div>
+                <!-- boton guardar -->
+                <div class="flex flex-col">
+                    <a class="text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700">Guardar</a>
+                </div>
+           </div>
+        </div>
+
+    </div>
+</div>

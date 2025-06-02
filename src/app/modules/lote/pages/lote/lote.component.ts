@@ -12,7 +12,6 @@ import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ReporteAnalisisComponent } from "../../../analisis/shared/reporte-analisis/reporte-analisis.component";
 import { AgregarAnalisisComponent } from "../../../analisis/shared/agregar-analisis/agregar-analisis.component";
-import { CrearAnalisisComponent } from '../../../analisis/analisisRapido/components/crear-analisis/crear-analisis.component';
 
 
 
@@ -21,7 +20,7 @@ import { CrearAnalisisComponent } from '../../../analisis/analisisRapido/compone
   imports: [
     NgIf, FormsModule, RouterModule, TableComponent,
     CrearLoteComponent, EditarLoteComponent, LoteMuestraComponent,
-    ReporteAnalisisComponent, AgregarAnalisisComponent, CrearAnalisisComponent
+    ReporteAnalisisComponent, AgregarAnalisisComponent
   ],
   templateUrl: './lote.component.html',
 
@@ -41,6 +40,7 @@ export class LoteComponent implements OnInit {
   mostrarModalLote: boolean = false;
   mostrarModalLoteMuestra: boolean = false;
   mostrarReporte: boolean=false ;
+  mostrarCrearAnalisis: boolean = false;
   loteIdActual: string = '';
 
   columnsVerde = [
@@ -157,6 +157,7 @@ export class LoteComponent implements OnInit {
       this.mostrarReporte = true;
     }else{
       this.alertaService.mostrar('error', "este lote no tiene un analisis asosciado")
+      this.mostrarCrearAnalisis = true;
     }
 
   }
@@ -170,6 +171,7 @@ export class LoteComponent implements OnInit {
     this.mostrarModalLote = false;
     this.mostrarModalLoteMuestra = false;
     this.mostrarReporte = false;
+    this.mostrarCrearAnalisis = false;
 
   }
 

@@ -36,4 +36,8 @@ export class AnalisisService {
   deleteAnalisis(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+   getAnalisisByLoteId(id_lote: string): Observable<Analisis> {
+    return this.http.get<Analisis>(`${this.baseUrl}/lote/${id_lote}`);
+  }
 }

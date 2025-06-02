@@ -33,4 +33,5 @@ export class AnalisisFisicoService {
   deleteAnalisis(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+ 
 }
