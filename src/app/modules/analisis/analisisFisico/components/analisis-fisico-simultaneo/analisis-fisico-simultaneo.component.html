@@ -15,7 +15,7 @@
         <div class="flex">
            <div class="flex-4 p-5">
                 <app-crear-analisis
-                    [analisis]="analisis">
+                    [(analisis)]="analisis">
                 </app-crear-analisis>
                 
            </div>
@@ -52,7 +52,7 @@
                 </div>
                 <!-- boton guardar -->
                 <div class="flex flex-col">
-                    <a class="text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700">Guardar</a>
+                    <a class="text-white block px-4 space-y-4 p-6 hover:bg-[#f4a261] border-gray-700" (click)="guardarTodosAnalisis()">Guardar</a>
                 </div>
            </div>
         </div>

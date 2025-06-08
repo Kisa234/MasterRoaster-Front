@@ -8,6 +8,8 @@ import { AgregarLoteMuestraComponent } from '../../../shared/agregar-lote-muestr
 import { AnalisisFisico } from '../../../../../interfaces/analisisFisico.interface';
 import { ConfirmacionService } from '../../../../../shared/services/confirmacion.service';
 import { FormsModule } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-analisis-fisico-simultaneo',
@@ -26,6 +28,7 @@ export class AnalisisFisicoSimultaneoComponent {
 
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
+  selectedItemId: string | null = null;
   selecciones: { tipo: string, id: string }[] = [];
   mostrarAgregar: boolean = false;
   analisisPorItem: {
@@ -64,66 +67,102 @@ export class AnalisisFisicoSimultaneoComponent {
     defectos_secundarios: []
   };
   
-  async guardarSeleccion(seleccion: { tipo: string, id: string }) {
-  const yaExiste = this.selecciones.some(s => s.tipo === seleccion.tipo && s.id === seleccion.id);
-  if (yaExiste) {
-    this.alertaService.mostrar('info', 'Este ítem ya fue agregado');
-    return;
-  }
-
-  this.selecciones.push(seleccion);
-  this.cerrarAgregar();
-
-  // Buscar análisis solo una vez al agregar
-  this.AnalisisService.getAnalisisByLoteId(seleccion.id).subscribe({
-      next: async (analisis) => {
-        if (analisis?.analisisFisico_id) {
+    async guardarSeleccion(seleccion: { tipo: string, id: string }) {
+      const yaExiste = this.selecciones.some(s => s.tipo === seleccion.tipo && s.id === seleccion.id);
+      if (yaExiste) {
+        this.alertaService.mostrar('info', 'Este ítem ya fue agregado');
+        return;
+      }
+    
+      // solicitamos el análisis actual para decidir
+      this.AnalisisService.getAnalisisByLoteId(seleccion.id).subscribe({
+        next: async (analisis) => {
+          const tieneFisico    = Boolean(analisis?.analisisFisico_id);
+          const tieneSensorial = Boolean((analisis as any)?.analisisSensorial_id);
+        
+          // 1) Si hay físico pero NO sensorial → error y NO agregamos
+          if (tieneFisico && !tieneSensorial) {
+            this.alertaService.mostrar(
+              'error',
+              `El Analisis del lote ${seleccion.id} no esta completo. Debe tener análisis sensorial para poder completarse.`,
+            );
+            return;
+          }
+        
+          // A partir de aquí sí que agregamos a la lista y cerramos el modal
+          this.selecciones.push(seleccion);
+          this.cerrarAgregar();
+        
+          // 2) Si hay sensorial pero NO físico → sólo crear uno nuevo
+          if (!tieneFisico && tieneSensorial) {
+            const nuevo = this.crearAnalisisVacio();
+            this.registrarAnalisis(seleccion.id, nuevo, 'nuevo');
+            return;
+          }
+        
+          // 3) Si no hay ninguno → crear nuevo
+          if (!tieneFisico && !tieneSensorial) {
+            const nuevo = this.crearAnalisisVacio();
+            this.registrarAnalisis(seleccion.id, nuevo, 'nuevo');
+            return;
+          }
+        
+          // 4) Si tiene ambos → preguntar Editar o Crear nuevo
           const confirmar = await this.confirmacionService.solicitarConfirmacion({
             titulo: 'Análisis ya existente',
-            mensaje: '¿Deseas editar el último análisis o crear uno nuevo?',
+            mensaje: 'Este lote ya tiene análisis físico y sensorial. ¿Editar último o crear uno nuevo?',
             textoConfirmar: 'Editar',
             textoCancelar: 'Crear nuevo'
           });
+        
           if (confirmar) {
-            this.analisisFisicoService.getAnalisisById(analisis.analisisFisico_id).subscribe({
-              next: (analisisFisico) => {
-                this.registrarAnalisis(seleccion.id, analisisFisico, 'editar');
-              }
-            });
+            this.analisisFisicoService.getAnalisisById(analisis.analisisFisico_id)
+              .subscribe(af => this.registrarAnalisis(seleccion.id, af, 'editar'));
           } else {
             const nuevo = this.crearAnalisisVacio();
             this.registrarAnalisis(seleccion.id, nuevo, 'nuevo');
           }
-        } else {
+        },
+        error: () => {
+          // Si falla la petición, lo tratamos como "no hay análisis" y permitimos crear uno nuevo
+          this.selecciones.push(seleccion);
+          this.cerrarAgregar();
           const nuevo = this.crearAnalisisVacio();
           this.registrarAnalisis(seleccion.id, nuevo, 'nuevo');
         }
-      },
-      error: () => {
-        const nuevo = this.crearAnalisisVacio();
-        this.registrarAnalisis(seleccion.id, nuevo, 'nuevo');
-      }
-    });
-  }
+      });
+    }
+
+
 
   registrarAnalisis(id: string, analisis: AnalisisFisico, modo: 'editar' | 'nuevo') {
-    this.analisisPorItem[id] = {
-      analisis,
-      modo
-    };
-    this.analisis = analisis;
+    // 1) guardo o sobreescribo el analisis en el map
+    this.analisisPorItem[id] = { analisis, modo };
+    // 2) apunto this.analisis al objeto correspondiente
+    this.analisis = this.analisisPorItem[id].analisis;
+    // 3) marco este id como el actualmente activo
+    this.selectedItemId = id;
   }
 
 
   mostrarAnalisisDe(item: { tipo: string, id: string }) {
-    const registro = this.analisisPorItem[item.id];
-    if (registro) {
-      this.analisis = registro.analisis;
-      console.log(`Modo seleccionado: ${registro.modo}`);
-    } else {
-      this.alertaService.mostrar('warning', 'Este ítem aún no tiene análisis cargado.');
+    // Si ya había uno activo, guarda sus cambios
+    if (this.selectedItemId) {
+      this.analisisPorItem[this.selectedItemId].analisis = this.analisis;
     }
+
+    const registro = this.analisisPorItem[item.id];
+    if (!registro) {
+      this.alertaService.mostrar('warning', 'Este ítem aún no tiene análisis cargado.');
+      return;
+    }
+
+    // Apunta al nuevo
+    this.analisis = registro.analisis;
+    this.selectedItemId = item.id;
+    console.log(`Modo seleccionado: ${registro.modo}`);
   }
+
   
   eliminarSeleccion(item: { tipo: string, id: string }, event: Event) {
     event.stopPropagation(); // Evita que dispare `mostrarAnalisisDe`
@@ -173,4 +212,39 @@ export class AnalisisFisicoSimultaneoComponent {
   cerrar() {
    this.onCerrar.emit();
   }
+
+  async guardarTodosAnalisis() {
+    // 1) Asegúrate de guardar el análisis activo en el map
+    if (this.selectedItemId) {
+      this.analisisPorItem[this.selectedItemId].analisis = this.analisis;
+    }
+
+    // 2) Crea una promesa por cada lote/muestra
+    const tasks = this.selecciones.map(item => {
+      const { analisis, modo } = this.analisisPorItem[item.id];
+
+      if (modo === 'nuevo') {
+        // createAnalisis(data, id_lote)
+        return lastValueFrom(
+          this.analisisFisicoService.createAnalisis(analisis, item.id)
+        );
+      } else {
+        // updateAnalisis(id_lote, data)
+        return lastValueFrom(
+          this.analisisFisicoService.updateAnalisis(item.id, analisis)
+        );
+      }
+    });
+
+    // 3) Ejecuta todas las peticiones en paralelo
+    try {
+      await Promise.all(tasks);
+      this.alertaService.mostrar('success', 'Todos los análisis físicos se guardaron correctamente.');
+      this.onAnalisisCreado.emit();
+      this.cerrar();
+    } catch (e: any) {
+      this.alertaService.mostrar('error', `Error al guardar: ${e.message}`);
+    }
+  }
+
 }

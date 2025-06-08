@@ -25,11 +25,17 @@ export class CrearAnalisisFisicoComponent {
   @Output() onAnalisisCreado = new EventEmitter<any>();
   @Input() set analisis(value: AnalisisFisico | null) {
     if (value) {
-      this.nuevoAnalisis = { ...value };
+      this.Analisis = { ...value };
     }
   }
+  @Output() analisisChange = new EventEmitter<AnalisisFisico>();
 
-  nuevoAnalisis:AnalisisFisico = {
+  onFieldChange() {
+    this.analisisChange.emit(this.Analisis);
+  }
+
+
+  Analisis:AnalisisFisico = {
     peso_muestra: 0,
     peso_pergamino: 0,
     wa: 0,
@@ -57,17 +63,7 @@ export class CrearAnalisisFisicoComponent {
     fecha_registro: new Date(),
   };
 
-  guardar() {
-    this.analisisFisicoService.createAnalisis(this.nuevoAnalisis).subscribe({
-      next: (res) => {
-        this.onAnalisisCreado.emit();
-        this.cerrar();
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
-  }
+  
 
   cerrar() {
     this.onCerrar.emit();

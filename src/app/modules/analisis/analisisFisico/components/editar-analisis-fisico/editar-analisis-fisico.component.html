@@ -14,43 +14,43 @@
     <div class="grid grid-cols-4 gap-4">
       <label class="block">
         <span class="text-white">Peso Muestra (g)</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_muestra" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.peso_muestra" />
       </label>
 
       <label class="block">
         <span class="text-white">Peso Pergamino (g)</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_pergamino" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.peso_pergamino" />
       </label>
 
       <label class="block">
         <span class="text-white">WA</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.wa" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.wa" />
       </label>
 
       <label class="block">
         <span class="text-white">Temperatura WA</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.temperatura_wa" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.temperatura_wa" />
       </label>
 
       <label class="block">
         <span class="text-white">Humedad (%)</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.humedad" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.humedad" />
       </label>
 
       <label class="block">
         <span class="text-white">Temp. Humedad</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.temperatura_humedad" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.temperatura_humedad" />
       </label>
 
       <label class="block">
         <span class="text-white">Densidad</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.densidad" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.densidad" />
       </label>
 
       <!-- COMBOBOX: COLOR -->
       <label class="block">
         <span class="text-white">Color Grano Verde</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.color_grano_verde">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.color_grano_verde">
           <option *ngFor="let color of colores" [value]="color">{{ color }}</option>
         </select>
       </label>
@@ -58,65 +58,65 @@
       <!-- COMBOBOX: OLOR -->
       <label class="block">
         <span class="text-white">Olor</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.olor">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.olor">
           <option *ngFor="let olor of olores" [value]="olor">{{ olor }}</option>
         </select>
       </label>
 
       <label class="block">
         <span class="text-white">Sup. Malla 18</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_18" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.superior_malla_18" />
       </label>
 
       <label class="block">
         <span class="text-white">Sup. Malla 16</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_16" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.superior_malla_16" />
       </label>
 
       <label class="block">
         <span class="text-white">Sup. Malla 14</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.superior_malla_14" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.superior_malla_14" />
       </label>
 
       <label class="block">
         <span class="text-white">Menor Malla 16</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.menor_malla_16" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.menor_malla_16" />
       </label>
 
       <label class="block">
         <span class="text-white">Peso Defectos</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_defectos" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()"[(ngModel)]="analisis.peso_defectos" />
       </label>
 
       <label class="block">
         <span class="text-white">Quaquers</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.quaquers" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.quaquers" />
       </label>
 
       <label class="block">
         <span class="text-white">Peso Muestra Tostada</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.peso_muestra_tostada" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.peso_muestra_tostada" />
       </label>
 
       <label class="block">
         <span class="text-white">Desarrollo</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.desarrollo" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (ngModelChange)="onFieldChange()"  [(ngModel)]="analisis.desarrollo" />
       </label>
 
       <label class="block">
         <span class="text-white">% Caramelización</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.pocentaje_caramelizcacion" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.pocentaje_caramelizcacion" />
       </label>
 
       <label class="block">
         <span class="text-white">C. Desarrollo</span>
-        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.c_desarrollo" />
+        <input type="number" class=" rounded px-3 py-2 w-full bg-gray-800 text-white" (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.c_desarrollo" />
       </label>
 
       <!-- COMBOBOX: GRADO -->
       <label class="block">
         <span class="text-white">Grado</span>
-        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.grado">
+        <select class=" rounded px-3 py-2 w-full bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.grado">
           <option *ngFor="let grado of grados" [value]="grado">{{ grado }}</option>
         </select>
       </label>
@@ -125,7 +125,7 @@
 
     <label class="block w-full col-span-2 mt-4">
       <span class="text-white">Comentario</span>
-      <textarea class="w-full px-3  py-2 h-[150px] rounded bg-gray-800 text-white" [(ngModel)]="nuevoAnalisis.comentario"></textarea>
+      <textarea class="w-full px-3  py-2 h-[150px] rounded bg-gray-800 text-white"  (ngModelChange)="onFieldChange()" [(ngModel)]="analisis.comentario"></textarea>
     </label>
 
     <div class="flex justify-center mt-4 space-x-4">

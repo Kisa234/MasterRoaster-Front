@@ -21,7 +21,7 @@ export class EditarAnalisisFisicoComponent implements OnInit {
       console.log(this.id);
       this.analisisFisicoService.getAnalisisById(this.id).subscribe({
         next: (response) => {
-          this.nuevoAnalisis = response;
+          this.analisis = response;
         },
         error: (error) => console.error('Error al obtener el analisis:', error)
       });
@@ -31,13 +31,18 @@ export class EditarAnalisisFisicoComponent implements OnInit {
   @Input() id: string = "";
   @Output() onCerrar = new EventEmitter<void>();
   @Output() onAnalisisCreado = new EventEmitter<any>();
+  @Output() analisisChange = new EventEmitter<AnalisisFisico>();
+
+  onFieldChange() {
+    this.analisisChange.emit(this.analisis);
+  }
 
   colores = ['Azul verde', 'Azulado Verde', 'Verde', 'Verdoso', 'Amarillo verde', 'Amarillo Pálido', 'Amarillento', 'Marrón'];
   olores = ['Olor Extrano', 'Olor a Humedad', 'limpio'];
   grados = ['Especial', 'Grado 1', 'Grado 2', 'Grado 3', 'Convencional'];
 
 
-  nuevoAnalisis: AnalisisFisico = {
+  analisis: AnalisisFisico = {
     peso_muestra: 0,
     peso_pergamino: 0,
     wa: 0,
@@ -68,7 +73,7 @@ export class EditarAnalisisFisicoComponent implements OnInit {
 
 
   guardar() {
-    this.analisisFisicoService.updateAnalisis(this.id,this.nuevoAnalisis)
+    this.analisisFisicoService.updateAnalisis(this.id,this.analisis)
         .subscribe({
           next: (response) => {
            
